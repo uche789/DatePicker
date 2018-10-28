@@ -82,7 +82,7 @@ var Calendar =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/index.js");
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -118,6 +118,23 @@ function () {
   }
 
   _createClass(CalendarBody, [{
+    key: "createBody",
+    value: function createBody() {
+      var calendarBody = document.querySelector('#calendar tbody');
+
+      for (var i = 1; i <= 6; i++) {
+        var tr = document.createElement('tr');
+
+        for (var j = 1; j <= 7; j++) {
+          var td = document.createElement('td');
+          td.innerText = 'x';
+          tr.appendChild(td);
+        }
+
+        calendarBody.appendChild(tr);
+      }
+    }
+  }, {
     key: "generate",
     value: function generate() {
       var calendarTable = document.querySelectorAll('#calendar tbody td');
@@ -142,12 +159,12 @@ function () {
             calendarTable[i].innerText = nextMonthNumberOfDays++;
           }
 
-          calendarTable[i].classList.add('otherMonth');
+          calendarTable[i].classList.add('date-different-month');
         }
 
         if (startDay === i || dateNumber > 1 && dateNumber <= thisMonthNumberOfDays) {
           calendarTable[i].innerText = dateNumber;
-          calendarTable[i].classList.remove('otherMonth');
+          calendarTable[i].classList.remove('date-different-month');
           dateNumber++;
         }
       }
@@ -158,6 +175,7 @@ function () {
       this.currentDate = data.currentDate;
       this.currentYear = data.currentYear;
       this.currentMonth = data.currentMonth;
+      this.generate();
     }
   }, {
     key: "getNumberOfDays",
@@ -252,7 +270,6 @@ function () {
     value: function updateCalendar() {
       this.setYearAndMonth();
       this.eventObserver.broadcast(this);
-      this.calendarBody.generate();
     }
   }, {
     key: "createCalendar",
@@ -260,6 +277,7 @@ function () {
       var calenderElement = document.querySelector('#calendar');
       calenderElement.innerHTML = "<table>\n            <thead>\n                <tr id=\"month-switcher\">\n                    <th colspan=\"7\"><span id=\"month-prev-button\"></span> <span id=\"monthName\"></span> <span id=\"selectedYear\"></span> <span id=\"month-next-button\"></span></th>\n                </tr>\n                <tr>\n                    <td colspan=\"7\"><span id=\"calendar-reset-button\"></span></td>\n                </tr>\n                <tr>\n                    <th>".concat(this.translations.days.mon, "</th>\n                    <th>").concat(this.translations.days.tue, "</th>\n                    <th>").concat(this.translations.days.wed, "</th>\n                    <th>").concat(this.translations.days.thu, "</th>\n                    <th>").concat(this.translations.days.fri, "</th>\n                    <th>").concat(this.translations.days.sat, "</th>\n                    <th>").concat(this.translations.days.sun, "</th>\n                </tr>\n            </thead>\n            <tbody></tbody>\n        </table>");
       this.setButtons();
+      this.calendarBody.createBody();
       this.setDefaults();
     }
   }, {
@@ -305,9 +323,7 @@ function () {
         this.currentMonth++;
       }
 
-      this.setYearAndMonth();
-      this.calendarBody.generate();
-      this.eventObserver.broadcast(this);
+      this.updateCalendar();
     }
   }, {
     key: "setYearAndMonth",
@@ -492,18 +508,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DatePicker", function() { return _date_picker_index__WEBPACK_IMPORTED_MODULE_0__["default"]; });
 
 
-
-
-/***/ }),
-
-/***/ 0:
-/*!****************************!*\
-  !*** multi ./src/index.js ***!
-  \****************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(/*! ./src/index.js */"./src/index.js");
 
 
 /***/ })

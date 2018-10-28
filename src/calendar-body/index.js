@@ -6,8 +6,6 @@ export default class CalendarBody {
             THIS_MONTH: 1,
             NEXT_MONTH: 2 
         };
-
-        this.createBody();
     }
 
     createBody () {
@@ -49,12 +47,12 @@ export default class CalendarBody {
                     calendarTable[i].innerText = nextMonthNumberOfDays++;
                 }
 
-                calendarTable[i].classList.add('otherMonth');
+                calendarTable[i].classList.add('date-different-month');
             }
 
             if (startDay  === i || (dateNumber > 1 && dateNumber <= thisMonthNumberOfDays)) {
                 calendarTable[i].innerText = dateNumber;
-                calendarTable[i].classList.remove('otherMonth');
+                calendarTable[i].classList.remove('date-different-month');
                 dateNumber++;
             }
         }
@@ -64,6 +62,7 @@ export default class CalendarBody {
         this.currentDate = data.currentDate;
         this.currentYear = data.currentYear;
         this.currentMonth = data.currentMonth;
+        this.generate();
     }
 
     getNumberOfDays (type) {

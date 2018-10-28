@@ -25,7 +25,6 @@ export default class DatePicker {
     updateCalendar() {
         this.setYearAndMonth();
         this.eventObserver.broadcast(this);
-        this.calendarBody.generate();
     }
 
     createCalendar () {
@@ -53,6 +52,7 @@ export default class DatePicker {
         </table>`;
 
         this.setButtons();
+        this.calendarBody.createBody();
         this.setDefaults();
     }
 
@@ -98,9 +98,7 @@ export default class DatePicker {
             this.currentMonth++;
         }
     
-        this.setYearAndMonth();
-        this.calendarBody.generate();
-        this.eventObserver.broadcast(this);
+        this.updateCalendar();
     }
 
     setYearAndMonth () {
