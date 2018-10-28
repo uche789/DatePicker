@@ -1,3 +1,3 @@
-import Calendar from './calendar';
+import DatePicker from './date-picker/index';
 
-window.calendar = new Calendar();
+export { DatePicker };
