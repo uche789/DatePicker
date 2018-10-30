@@ -1,9 +1,9 @@
 const path = require('path');
 
 module.exports = {
-    mode: 'development',
-    entry: './src/index.js',
-    watch: true,
+    mode: process.env.NODE_ENV || 'production',
+    entry: ['./src/index.js'],
+    watch: process.env.NODE_ENV === 'development' ? true : false,
     output: {
         library: 'Calendar',
         libraryTarget: 'var',
@@ -27,5 +27,5 @@ module.exports = {
             }
         ]
     },
-    devtool: 'source-map'
+    devtool: process.env.NODE_ENV === 'development' ? 'source-map' : false
 }
