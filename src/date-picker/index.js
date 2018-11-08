@@ -5,30 +5,50 @@ import EventObserver from '../event-observer/index';
 export default class DatePicker {
     constructor () {
         this.eventObserver = new EventObserver();
+        this.date = {};
     }
 
-    initialize (options) {
-        this.translations = getTranslations()[options.lang];
+    initialize (options = {}) {
+        this.translations = getTranslations()[options.lang || 'en'];
+        this.date.onchange = options.onchange || function () {};
         this.calendarBody = new CalendarBody(this.translations);
         this.eventObserver.subscribe(this.calendarBody);
         this.createCalendar();
     }
 
     setDefaults () {
-        this.currentDate = new Date();
-        this.currentYear = this.currentDate.getFullYear();
-        this.currentMonth = this.currentDate.getMonth();
-
+        this.date.current = new Date();
+        this.date.currentYear = this.date.current.getFullYear();
+        this.date.currentMonth = this.date.current.getMonth();
         this.updateCalendar();
     }
 
+    setDates () {
+        if (this.date.currentMonth === 0) {
+            this.date.lastMonth = 11;
+            this.date.lastYear = (new Date(this.date.current.setYear(this.date.currentYear - 1))).getFullYear();
+        } else {
+            this.date.lastYear = this.date.currentYear;
+            this.date.lastMonth = this.date.currentMonth - 1;
+        }
+    
+        if (this.date.currentMonth >= 11) {
+            this.date.nextMonth = 0;
+            this.date.nextYear = (new Date(this.date.current.setYear(this.date.currentYear + 1))).getFullYear();
+        } else {
+            this.date.nextMonth = this.date.currentMonth + 1;
+            this.date.nextYear = this.date.currentYear;
+        }
+    }
+
     updateCalendar() {
+        this.setDates();
         this.setYearAndMonth();
-        this.eventObserver.broadcast(this);
+        this.eventObserver.broadcast(this.date);
     }
 
     createCalendar () {
-        let calenderElement = document.querySelector('#calendar');
+        let calenderElement = document.querySelector('#date-picker');
     
         calenderElement.innerHTML = `<table>
             <thead>
@@ -78,24 +98,24 @@ export default class DatePicker {
     }
 
     prevMonth () {
-        if (this.currentMonth === 0) {
-            this.currentMonth = 11;
-            this.currentYear = (new Date(this.currentDate.setYear(this.currentYear - 1))).getFullYear();
-            this.currentDate = new Date(this.currentYear, this.currentMonth, 0);
+        if (this.date.currentMonth === 0) {
+            this.date.currentMonth = 11;
+            this.date.currentYear = (new Date(this.date.current.setYear(this.date.currentYear - 1))).getFullYear();
+            this.date.current = new Date(this.date.currentYear, this.date.currentMonth, 0);
         } else {
-            this.currentMonth--;
+            this.date.currentMonth--;
         }
     
         this.updateCalendar();
     }
     
      nextMonth () {
-        if (this.currentMonth >= 11) {
-            this.currentMonth = 0;
-            this.currentYear = (new Date(this.currentDate.setYear(this.currentYear + 1))).getFullYear();
-            this.currentDate = new Date(this.currentYear, this.currentMonth, 1);
+        if (this.date.currentMonth >= 11) {
+            this.date.currentMonth = 0;
+            this.date.currentYear = (new Date(this.date.current.setYear(this.date.currentYear + 1))).getFullYear();
+            this.date.current = new Date(this.date.currentYear, this.date.currentMonth, 1);
         } else {
-            this.currentMonth++;
+            this.date.currentMonth++;
         }
     
         this.updateCalendar();
@@ -103,7 +123,7 @@ export default class DatePicker {
 
     setYearAndMonth () {
         let months = ['January', 'Febuary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-        document.getElementById('monthName').innerText = months[this.currentMonth];
-        document.getElementById('selectedYear').innerText = this.currentYear;
+        document.getElementById('monthName').innerText = months[this.date.currentMonth];
+        document.getElementById('selectedYear').innerText = this.date.currentYear;
     }
 }

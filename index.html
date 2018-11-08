@@ -5,19 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <script src="dist/bundle.js"></script>
-    <style>
-        .date-different-month {
-            color: lightgray
-        }
-    </style>
 </head>
 <body>
-    <div id="calendar"></div>
+    <div id="date-picker"></div>
     <script>
         var datePicker = new Calendar.DatePicker();
-        datePicker.initialize({lang: 'fr'});
+        datePicker.initialize({
+            lang: 'fr',
+            onchange: function (event) { 
+                console.log(this)
+            }
+        });
     </script>
 </body>
 </html>

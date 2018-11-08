@@ -1,2 +1,25 @@
-@import "./calendar-body/style.scss";
-@import "./date-picker/style.scss"
+#date-picker {
+    color: black; 
+ 
+    .date-different-month {
+         color: lightgray
+     }
+ 
+     input[name="date-input-value"] {
+         display: none;
+ 
+         & + label > div {
+             width: 100%;
+             height: auto;
+             border-radius: 50%;
+             text-align: center; 
+         }
+         
+         
+     }
+ 
+     input[name="date-input-value"]:checked + label > div {
+         background-color: lightgray;
+     }
+ }
+ 
