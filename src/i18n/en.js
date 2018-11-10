@@ -1,5 +1,5 @@
 export const en = {
-    reset: 'Reset',
+    today: 'Today',
     days: {
         mon: 'Mon',
         tue: 'Tue',

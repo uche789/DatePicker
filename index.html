@@ -9,10 +9,11 @@
 </head>
 <body>
     <div id="date-picker"></div>
+    <div><input type="text" data-datepicker="format"/></div>
     <script>
         var datePicker = new Calendar.DatePicker();
         datePicker.initialize({
-            lang: 'fr',
+            lang: 'en',
             onchange: function (event) { 
                 console.log(this)
             }

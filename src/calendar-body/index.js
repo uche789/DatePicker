@@ -31,13 +31,11 @@ export default class CalendarBody {
         let defaultCheckedValue = this.date.current.getDate();
         let dateNumber = 1;
         let startDay = new Date(this.date.currentYear, this.date.currentMonth, 1).getDay() - 1;
-        let lastMonthNumberOfDays = this.getNumberOfDays(this.MONTH_TYPE.LAST_MONTH) - (startDay - 1);
+        let lastMonthNumberOfDays = this.getNumberOfDays(this.MONTH_TYPE.LAST_MONTH);
         let nextMonthNumberOfDays = 1;
 
-        if (startDay === -1) {
-            startDay = 6;
-            this.date.lastMonthNumberOfDays-=6;
-        }
+        startDay = startDay > -1 ? startDay : 6;
+        lastMonthNumberOfDays -= (startDay - 1);
 
         for (var i = 0; i < calendarTable.length; i++) {
             let value = 0;

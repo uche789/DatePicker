@@ -1,5 +1,5 @@
 export const fr = {
-    reset: 'Reset',
+    today: 'Au jourd\'hui',
     days: {
         mon: 'Lun',
         tue: 'Mar',

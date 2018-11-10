@@ -99,7 +99,7 @@ exports = module.exports = __webpack_require__(/*! ../node_modules/css-loader/li
 
 
 // module
-exports.push([module.i, "#date-picker {\n  color: black; }\n  #date-picker .date-different-month {\n    color: lightgray; }\n  #date-picker input[name=\"date-input-value\"] {\n    display: none; }\n    #date-picker input[name=\"date-input-value\"] + label > div {\n      width: 100%;\n      height: auto;\n      border-radius: 50%;\n      text-align: center; }\n  #date-picker input[name=\"date-input-value\"]:checked + label > div {\n    background-color: lightgray; }\n", ""]);
+exports.push([module.i, "#date-picker {\n  color: black; }\n  #date-picker table {\n    min-width: 210px; }\n  #date-picker .date-different-month {\n    color: lightgray; }\n  #date-picker input[name=\"date-input-value\"] {\n    display: none; }\n    #date-picker input[name=\"date-input-value\"] + label > div {\n      width: 100%;\n      height: auto;\n      border-radius: 50%;\n      text-align: center; }\n  #date-picker input[name=\"date-input-value\"]:checked + label > div {\n    background-color: lightgray; }\n  #date-picker #month-next-button {\n    float: right; }\n  #date-picker #month-prev-button {\n    float: left; }\n\n#calendar-reset-button a {\n  font-weight: normal;\n  cursor: pointer; }\n\n#month-switcher a {\n  font-weight: normal;\n  cursor: pointer; }\n", ""]);
 
 // exports
 
@@ -758,13 +758,10 @@ function () {
       var defaultCheckedValue = this.date.current.getDate();
       var dateNumber = 1;
       var startDay = new Date(this.date.currentYear, this.date.currentMonth, 1).getDay() - 1;
-      var lastMonthNumberOfDays = this.getNumberOfDays(this.MONTH_TYPE.LAST_MONTH) - (startDay - 1);
+      var lastMonthNumberOfDays = this.getNumberOfDays(this.MONTH_TYPE.LAST_MONTH);
       var nextMonthNumberOfDays = 1;
-
-      if (startDay === -1) {
-        startDay = 6;
-        this.date.lastMonthNumberOfDays -= 6;
-      }
+      startDay = startDay > -1 ? startDay : 6;
+      lastMonthNumberOfDays -= startDay - 1;
 
       for (var i = 0; i < calendarTable.length; i++) {
         var value = 0;
@@ -883,6 +880,7 @@ function () {
     value: function initialize() {
       var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
       this.translations = Object(_i18n_all__WEBPACK_IMPORTED_MODULE_0__["getTranslations"])()[options.lang || 'en'];
+      console.log(this.translations);
 
       this.date.onchange = options.onchange || function () {};
 
@@ -928,7 +926,7 @@ function () {
     key: "createCalendar",
     value: function createCalendar() {
       var calenderElement = document.querySelector('#date-picker');
-      calenderElement.innerHTML = "<table>\n            <thead>\n                <tr id=\"month-switcher\">\n                    <th colspan=\"7\"><span id=\"month-prev-button\"></span> <span id=\"monthName\"></span> <span id=\"selectedYear\"></span> <span id=\"month-next-button\"></span></th>\n                </tr>\n                <tr>\n                    <td colspan=\"7\"><span id=\"calendar-reset-button\"></span></td>\n                </tr>\n                <tr>\n                    <th>".concat(this.translations.days.mon, "</th>\n                    <th>").concat(this.translations.days.tue, "</th>\n                    <th>").concat(this.translations.days.wed, "</th>\n                    <th>").concat(this.translations.days.thu, "</th>\n                    <th>").concat(this.translations.days.fri, "</th>\n                    <th>").concat(this.translations.days.sat, "</th>\n                    <th>").concat(this.translations.days.sun, "</th>\n                </tr>\n            </thead>\n            <tbody></tbody>\n        </table>");
+      calenderElement.innerHTML = "<table>\n            <thead>\n                <tr id=\"month-switcher\">\n                    <th colspan=\"7\">\n                    <span id=\"month-prev-button\">\n                    <button><<</button><button><</button></span> <span id=\"monthName\"></span>\n                    <span id=\"selectedYear\"></span>\n                    <span id=\"month-next-button\"><button>></button><button>>></button></span>\n                    </th>\n                </tr>\n                <tr>\n                    <th colspan=\"7\"><span id=\"calendar-reset-button\"><a>".concat(this.translations.today, "</a></span></th>\n                </tr>\n                <tr>\n                    <th>").concat(this.translations.days.mon, "</th>\n                    <th>").concat(this.translations.days.tue, "</th>\n                    <th>").concat(this.translations.days.wed, "</th>\n                    <th>").concat(this.translations.days.thu, "</th>\n                    <th>").concat(this.translations.days.fri, "</th>\n                    <th>").concat(this.translations.days.sat, "</th>\n                    <th>").concat(this.translations.days.sun, "</th>\n                </tr>\n            </thead>\n            <tbody></tbody>\n        </table>");
       this.setButtons();
       this.calendarBody.createBody();
       this.setDefaults();
@@ -936,21 +934,28 @@ function () {
   }, {
     key: "setButtons",
     value: function setButtons() {
-      var monthPrev = document.querySelector('#month-prev-button');
-      var monthNext = document.querySelector('#month-next-button');
-      var resetButtonContainer = document.querySelector('#calendar-reset-button');
-      var buttonPrevMonth = document.createElement('button');
+      var buttonPrevMonth = document.querySelector('#month-prev-button button:nth-child(2)');
+      var buttonNextMonth = document.querySelector('#month-next-button button:first-child');
+      var buttonPrevYear = document.querySelector('#month-prev-button button:first-child');
+      var buttonNextYear = document.querySelector('#month-next-button button:nth-child(2)');
+      var resetToTodayButton = document.querySelector('#calendar-reset-button a');
       buttonPrevMonth.onclick = this.prevMonth.bind(this);
-      buttonPrevMonth.innerText = '<';
-      monthPrev.appendChild(buttonPrevMonth);
-      var buttonNextMonth = document.createElement('button');
       buttonNextMonth.onclick = this.nextMonth.bind(this);
-      buttonNextMonth.innerText = '>';
-      monthNext.appendChild(buttonNextMonth);
-      var resetButton = document.createElement('button');
-      resetButton.onclick = this.setDefaults.bind(this);
-      resetButton.innerHTML = this.translations.reset;
-      resetButtonContainer.appendChild(resetButton);
+      buttonPrevYear.onclick = this.prevYear.bind(this);
+      buttonNextYear.onclick = this.nextYear.bind(this);
+      resetToTodayButton.onclick = this.setDefaults.bind(this);
+    }
+  }, {
+    key: "prevYear",
+    value: function prevYear() {
+      this.date.currentYear--;
+      this.updateCalendar();
+    }
+  }, {
+    key: "nextYear",
+    value: function nextYear() {
+      this.date.currentYear++;
+      this.updateCalendar();
     }
   }, {
     key: "prevMonth",
@@ -958,11 +963,11 @@ function () {
       if (this.date.currentMonth === 0) {
         this.date.currentMonth = 11;
         this.date.currentYear = new Date(this.date.current.setYear(this.date.currentYear - 1)).getFullYear();
-        this.date.current = new Date(this.date.currentYear, this.date.currentMonth, 0);
       } else {
         this.date.currentMonth--;
       }
 
+      this.date.current = new Date(this.date.currentYear, this.date.currentMonth, 1);
       this.updateCalendar();
     }
   }, {
@@ -971,17 +976,17 @@ function () {
       if (this.date.currentMonth >= 11) {
         this.date.currentMonth = 0;
         this.date.currentYear = new Date(this.date.current.setYear(this.date.currentYear + 1)).getFullYear();
-        this.date.current = new Date(this.date.currentYear, this.date.currentMonth, 1);
       } else {
         this.date.currentMonth++;
       }
 
+      this.date.current = new Date(this.date.currentYear, this.date.currentMonth, 1);
       this.updateCalendar();
     }
   }, {
     key: "setYearAndMonth",
     value: function setYearAndMonth() {
-      var months = ['January', 'Febuary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+      var months = Object.values(this.translations.months);
       document.getElementById('monthName').innerText = months[this.date.currentMonth];
       document.getElementById('selectedYear').innerText = this.date.currentYear;
     }
@@ -1059,12 +1064,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTranslations", function() { return getTranslations; });
 /* harmony import */ var _en__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./en */ "./src/i18n/en.js");
 /* harmony import */ var _fr__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./fr */ "./src/i18n/fr.js");
+/* harmony import */ var _ja__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ja */ "./src/i18n/ja.js");
+
 
 
 function getTranslations() {
   return {
     en: _en__WEBPACK_IMPORTED_MODULE_0__["en"],
-    fr: _fr__WEBPACK_IMPORTED_MODULE_1__["fr"]
+    fr: _fr__WEBPACK_IMPORTED_MODULE_1__["fr"],
+    ja: _ja__WEBPACK_IMPORTED_MODULE_2__["ja"]
   };
 }
 
@@ -1081,7 +1089,7 @@ function getTranslations() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "en", function() { return en; });
 var en = {
-  reset: 'Reset',
+  today: 'Today',
   days: {
     mon: 'Mon',
     tue: 'Tue',
@@ -1120,7 +1128,7 @@ var en = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fr", function() { return fr; });
 var fr = {
-  reset: 'Reset',
+  today: 'Au jourd\'hui',
   days: {
     mon: 'Lun',
     tue: 'Mar',
@@ -1143,6 +1151,45 @@ var fr = {
     october: 'Octobre',
     november: 'Novembre',
     december: 'Décembre'
+  }
+};
+
+/***/ }),
+
+/***/ "./src/i18n/ja.js":
+/*!************************!*\
+  !*** ./src/i18n/ja.js ***!
+  \************************/
+/*! exports provided: ja */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ja", function() { return ja; });
+var ja = {
+  today: '今日',
+  days: {
+    mon: '月',
+    tue: '火',
+    wed: '水',
+    thu: '木',
+    fri: '金',
+    sat: '土',
+    sun: '日'
+  },
+  months: {
+    january: '一月',
+    febuary: '二月',
+    march: '三月',
+    april: '四月',
+    may: '五月',
+    june: '六月',
+    july: '七月',
+    august: '八月',
+    september: '九月',
+    october: '十月',
+    november: '十一月',
+    december: '十二月'
   }
 };
 

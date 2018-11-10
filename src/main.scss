@@ -1,5 +1,9 @@
 #date-picker {
     color: black; 
+
+    table {
+        min-width: 210px;
+    }
  
     .date-different-month {
          color: lightgray
@@ -21,5 +25,27 @@
      input[name="date-input-value"]:checked + label > div {
          background-color: lightgray;
      }
+
+     #month-next-button {
+         float: right;
+     }
+
+     #month-prev-button {
+         float: left;
+     }
  }
+
+ #calendar-reset-button {
+    a {
+        font-weight: normal;
+        cursor: pointer;    
+    }
+}
+
+#month-switcher {
+    a {
+        font-weight: normal;
+        cursor: pointer;
+    }
+}
  

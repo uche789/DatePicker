@@ -10,6 +10,7 @@ export default class DatePicker {
 
     initialize (options = {}) {
         this.translations = getTranslations()[options.lang || 'en'];
+        console.log(this.translations)
         this.date.onchange = options.onchange || function () {};
         this.calendarBody = new CalendarBody(this.translations);
         this.eventObserver.subscribe(this.calendarBody);
@@ -53,10 +54,15 @@ export default class DatePicker {
         calenderElement.innerHTML = `<table>
             <thead>
                 <tr id="month-switcher">
-                    <th colspan="7"><span id="month-prev-button"></span> <span id="monthName"></span> <span id="selectedYear"></span> <span id="month-next-button"></span></th>
+                    <th colspan="7">
+                    <span id="month-prev-button">
+                    <button><<</button><button><</button></span> <span id="monthName"></span>
+                    <span id="selectedYear"></span>
+                    <span id="month-next-button"><button>></button><button>>></button></span>
+                    </th>
                 </tr>
                 <tr>
-                    <td colspan="7"><span id="calendar-reset-button"></span></td>
+                    <th colspan="7"><span id="calendar-reset-button"><a>${this.translations.today}</a></span></th>
                 </tr>
                 <tr>
                     <th>${this.translations.days.mon}</th>
@@ -77,35 +83,38 @@ export default class DatePicker {
     }
 
     setButtons () {
-        let monthPrev = document.querySelector('#month-prev-button');
-        let monthNext = document.querySelector('#month-next-button');
-        let resetButtonContainer = document.querySelector('#calendar-reset-button');
+        let buttonPrevMonth = document.querySelector('#month-prev-button button:nth-child(2)');
+        let buttonNextMonth = document.querySelector('#month-next-button button:first-child');
+        let buttonPrevYear = document.querySelector('#month-prev-button button:first-child');
+        let buttonNextYear = document.querySelector('#month-next-button button:nth-child(2)');
+        let resetToTodayButton = document.querySelector('#calendar-reset-button a');
 
-        let buttonPrevMonth = document.createElement('button');
         buttonPrevMonth.onclick = this.prevMonth.bind(this);
-        buttonPrevMonth.innerText = '<';
-        monthPrev.appendChild(buttonPrevMonth);
-
-        let buttonNextMonth = document.createElement('button');
         buttonNextMonth.onclick = this.nextMonth.bind(this);
-        buttonNextMonth.innerText = '>';
-        monthNext.appendChild(buttonNextMonth);
+        buttonPrevYear.onclick = this.prevYear.bind(this);
+        buttonNextYear.onclick = this.nextYear.bind(this);
+        resetToTodayButton.onclick = this.setDefaults.bind(this);
+    }
 
-        let resetButton = document.createElement('button');
-        resetButton.onclick = this.setDefaults.bind(this);
-        resetButton.innerHTML = this.translations.reset;
-        resetButtonContainer.appendChild(resetButton);
+    prevYear () {
+        this.date.currentYear--;
+        this.updateCalendar();
+    }
+
+    nextYear () {
+        this.date.currentYear++;
+        this.updateCalendar();
     }
 
     prevMonth () {
         if (this.date.currentMonth === 0) {
             this.date.currentMonth = 11;
             this.date.currentYear = (new Date(this.date.current.setYear(this.date.currentYear - 1))).getFullYear();
-            this.date.current = new Date(this.date.currentYear, this.date.currentMonth, 0);
         } else {
             this.date.currentMonth--;
         }
-    
+
+        this.date.current = new Date(this.date.currentYear, this.date.currentMonth, 1);    
         this.updateCalendar();
     }
     
@@ -113,16 +122,16 @@ export default class DatePicker {
         if (this.date.currentMonth >= 11) {
             this.date.currentMonth = 0;
             this.date.currentYear = (new Date(this.date.current.setYear(this.date.currentYear + 1))).getFullYear();
-            this.date.current = new Date(this.date.currentYear, this.date.currentMonth, 1);
         } else {
             this.date.currentMonth++;
         }
     
+        this.date.current = new Date(this.date.currentYear, this.date.currentMonth, 1);
         this.updateCalendar();
     }
 
     setYearAndMonth () {
-        let months = ['January', 'Febuary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        let months = Object.values(this.translations.months);
         document.getElementById('monthName').innerText = months[this.date.currentMonth];
         document.getElementById('selectedYear').innerText = this.date.currentYear;
     }
