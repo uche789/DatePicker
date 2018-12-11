@@ -9,12 +9,61 @@ export default class DatePicker {
     }
 
     initialize (options = {}) {
-        this.translations = getTranslations()[options.lang || 'en'];
-        console.log(this.translations)
-        this.date.onchange = options.onchange || function () {};
+        this.lang = options.lang || 'en'
+        this.translations = getTranslations()[this.lang];
+        this.date.onchange = this.setInputValue.bind(this);
+        this.format = options.format || 'dd/mm/yyyy'
+
         this.calendarBody = new CalendarBody(this.translations);
         this.eventObserver.subscribe(this.calendarBody);
         this.createCalendar();
+        this.setAllFields();
+    }
+
+    setInputValue (event) {
+        let datePicker = document.querySelector('#date-picker');
+        this.focusedElement.value = (new Date(event.target.value)).toLocaleDateString(this.lang);
+        this.focusedElement = null;
+        datePicker.style.display = 'none';
+        this.setDefaults();
+    }
+
+    setAllFields () {
+        let _this = this;
+        let inputFields = document.querySelectorAll('input[data-datepicker]');
+        let datePicker = document.querySelector('#date-picker');
+        this.focused
+        Element = null;
+
+        inputFields.forEach(input => {
+            input.onfocus = function (event) {
+                let rects = event.target.getBoundingClientRect();
+
+                _this.focusedElement = event.target;
+                datePicker.style.display = 'table';
+                datePicker.style.left = rects.left + 'px';
+                datePicker.style.top = (event.target.offsetHeight + rects.top) + 'px';
+                _this.setDefaults();
+
+                //todo: set value of calendar
+            };
+        });
+
+        this.hideIfOutsideBox();
+    }
+
+    hideIfOutsideBox () {
+        document.addEventListener('click', function (event) {
+            let datePicker = document.querySelector('#date-picker');
+            let focusedElement = document.querySelector('input[data-datepicker]:focus');
+            
+            if (focusedElement || datePicker.contains(event.target)) {
+                return;
+            }
+
+            datePicker.style.display = 'none';
+            this.setDefaults();
+        }.bind(this));
     }
 
     setDefaults () {
@@ -24,7 +73,7 @@ export default class DatePicker {
         this.updateCalendar();
     }
 
-    setDates () {
+    setPreviousAndNextDates () {
         if (this.date.currentMonth === 0) {
             this.date.lastMonth = 11;
             this.date.lastYear = (new Date(this.date.current.setYear(this.date.currentYear - 1))).getFullYear();
@@ -43,15 +92,15 @@ export default class DatePicker {
     }
 
     updateCalendar() {
-        this.setDates();
+        this.setPreviousAndNextDates();
         this.setYearAndMonth();
         this.eventObserver.broadcast(this.date);
     }
 
     createCalendar () {
-        let calenderElement = document.querySelector('#date-picker');
+        let bodyElement = document.querySelector('body');
     
-        calenderElement.innerHTML = `<table>
+        bodyElement.innerHTML += `<div id="date-picker" style="display: none;"><table>
             <thead>
                 <tr id="month-switcher">
                     <th colspan="7">
@@ -75,7 +124,7 @@ export default class DatePicker {
                 </tr>
             </thead>
             <tbody></tbody>
-        </table>`;
+        </table></div>`;
 
         this.setButtons();
         this.calendarBody.createBody();

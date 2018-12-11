@@ -28,7 +28,8 @@ export default class CalendarBody {
     generate () {
         let calendarTable = document.querySelectorAll('#date-picker tbody td');
         let thisMonthNumberOfDays = this.getNumberOfDays(this.MONTH_TYPE.THIS_MONTH);
-        let defaultCheckedValue = this.date.current.getDate();
+        let todaysDate = new Date();
+        let dateInCalendar = null;
         let dateNumber = 1;
         let startDay = new Date(this.date.currentYear, this.date.currentMonth, 1).getDay() - 1;
         let lastMonthNumberOfDays = this.getNumberOfDays(this.MONTH_TYPE.LAST_MONTH);
@@ -51,7 +52,7 @@ export default class CalendarBody {
             if (dateNumber === 1 || dateNumber === thisMonthNumberOfDays + 1) {
                 if (startDay > i) {
                     value = lastMonthNumberOfDays;
-                    radioButton.value = `${lastMonthNumberOfDays}/${this.date.lastMonth+1}/${this.date.lastYear}`;
+                    radioButton.value = `${this.date.lastYear}-${this.date.lastMonth+1}-${lastMonthNumberOfDays}`;
                     label.innerText = lastMonthNumberOfDays;
                     radioButton.id = 'last-month-value_' + lastMonthNumberOfDays;
                     label.htmlFor = 'last-month-value_' + lastMonthNumberOfDays;
@@ -60,7 +61,7 @@ export default class CalendarBody {
 
                 if (dateNumber > thisMonthNumberOfDays) {
                     value = nextMonthNumberOfDays;
-                    radioButton.value = `${nextMonthNumberOfDays}/${this.date.nextMonth+1}/${this.date.nextYear}`;
+                    radioButton.value = `${this.date.nextYear}-${this.date.nextMonth+1}-${nextMonthNumberOfDays}`;
                     label.innerText = nextMonthNumberOfDays;
                     radioButton.id = 'next-month-value_' + nextMonthNumberOfDays;
                     label.htmlFor = 'next-month-value_' + nextMonthNumberOfDays;
@@ -73,12 +74,13 @@ export default class CalendarBody {
             if (startDay  === i || (dateNumber > 1 && dateNumber <= thisMonthNumberOfDays)) {
                 value = dateNumber;
                 calendarTable[i].classList.remove('date-different-month');
-                radioButton.value = `${dateNumber}/${this.date.currentMonth+1}/${this.date.currentYear}`;
+                radioButton.value = `${this.date.currentYear}-${this.date.currentMonth+1}-${dateNumber}`;
                 radioButton.id = 'current-month-value_' + dateNumber;
                 label.htmlFor = 'current-month-value_' + dateNumber;
+                dateInCalendar = new Date(this.date.currentYear, this.date.currentMonth, dateNumber);
                 dateNumber++;
-
-                if (value == defaultCheckedValue && this.date.current.getMonth() === this.date.currentMonth) {
+                
+                if (dateInCalendar === todaysDate) {
                     radioButton.checked = true;
                 }
             }

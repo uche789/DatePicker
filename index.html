@@ -1,23 +1,33 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="dist/bundle.js"></script>
+    <style>
+        div.picker {
+            display: inline-block;
+        }
+
+        .max {
+            padding: 20px; 
+        }
+    </style>
 </head>
+
 <body>
-    <div id="date-picker"></div>
-    <div><input type="text" data-datepicker="format"/></div>
+    <div class="picker"><input type="text" data-datepicker="format" /></div>
+    <div class="picker"><input type="text" data-datepicker="format" /></div>
+    <div class="max"><input type="text" data-datepicker="format" /></div>
     <script>
         var datePicker = new Calendar.DatePicker();
         datePicker.initialize({
-            lang: 'en',
-            onchange: function (event) { 
-                console.log(this)
-            }
+            lang: 'de'
         });
     </script>
 </body>
+
 </html>

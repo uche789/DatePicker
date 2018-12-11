@@ -99,7 +99,7 @@ exports = module.exports = __webpack_require__(/*! ../node_modules/css-loader/li
 
 
 // module
-exports.push([module.i, "#date-picker {\n  color: black; }\n  #date-picker table {\n    min-width: 210px; }\n  #date-picker .date-different-month {\n    color: lightgray; }\n  #date-picker input[name=\"date-input-value\"] {\n    display: none; }\n    #date-picker input[name=\"date-input-value\"] + label > div {\n      width: 100%;\n      height: auto;\n      border-radius: 50%;\n      text-align: center; }\n  #date-picker input[name=\"date-input-value\"]:checked + label > div {\n    background-color: lightgray; }\n  #date-picker #month-next-button {\n    float: right; }\n  #date-picker #month-prev-button {\n    float: left; }\n\n#calendar-reset-button a {\n  font-weight: normal;\n  cursor: pointer; }\n\n#month-switcher a {\n  font-weight: normal;\n  cursor: pointer; }\n", ""]);
+exports.push([module.i, "#date-picker {\n  position: absolute;\n  background-color: white;\n  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5); }\n  #date-picker table {\n    min-width: 210px; }\n  #date-picker .date-different-month {\n    color: lightgray; }\n  #date-picker input[name=\"date-input-value\"] {\n    display: none; }\n    #date-picker input[name=\"date-input-value\"] + label > div {\n      width: 100%;\n      height: auto;\n      border-radius: 50%;\n      text-align: center; }\n  #date-picker input[name=\"date-input-value\"]:checked + label > div {\n    background-color: lightgray; }\n  #date-picker #month-next-button {\n    float: right; }\n  #date-picker #month-prev-button {\n    float: left; }\n\n#calendar-reset-button a {\n  font-weight: normal;\n  cursor: pointer; }\n\n#month-switcher a {\n  font-weight: normal;\n  cursor: pointer; }\n", ""]);
 
 // exports
 
@@ -755,7 +755,8 @@ function () {
     value: function generate() {
       var calendarTable = document.querySelectorAll('#date-picker tbody td');
       var thisMonthNumberOfDays = this.getNumberOfDays(this.MONTH_TYPE.THIS_MONTH);
-      var defaultCheckedValue = this.date.current.getDate();
+      var todaysDate = new Date();
+      var dateInCalendar = null;
       var dateNumber = 1;
       var startDay = new Date(this.date.currentYear, this.date.currentMonth, 1).getDay() - 1;
       var lastMonthNumberOfDays = this.getNumberOfDays(this.MONTH_TYPE.LAST_MONTH);
@@ -775,7 +776,7 @@ function () {
         if (dateNumber === 1 || dateNumber === thisMonthNumberOfDays + 1) {
           if (startDay > i) {
             value = lastMonthNumberOfDays;
-            radioButton.value = "".concat(lastMonthNumberOfDays, "/").concat(this.date.lastMonth + 1, "/").concat(this.date.lastYear);
+            radioButton.value = "".concat(this.date.lastYear, "-").concat(this.date.lastMonth + 1, "-").concat(lastMonthNumberOfDays);
             label.innerText = lastMonthNumberOfDays;
             radioButton.id = 'last-month-value_' + lastMonthNumberOfDays;
             label.htmlFor = 'last-month-value_' + lastMonthNumberOfDays;
@@ -784,7 +785,7 @@ function () {
 
           if (dateNumber > thisMonthNumberOfDays) {
             value = nextMonthNumberOfDays;
-            radioButton.value = "".concat(nextMonthNumberOfDays, "/").concat(this.date.nextMonth + 1, "/").concat(this.date.nextYear);
+            radioButton.value = "".concat(this.date.nextYear, "-").concat(this.date.nextMonth + 1, "-").concat(nextMonthNumberOfDays);
             label.innerText = nextMonthNumberOfDays;
             radioButton.id = 'next-month-value_' + nextMonthNumberOfDays;
             label.htmlFor = 'next-month-value_' + nextMonthNumberOfDays;
@@ -797,12 +798,13 @@ function () {
         if (startDay === i || dateNumber > 1 && dateNumber <= thisMonthNumberOfDays) {
           value = dateNumber;
           calendarTable[i].classList.remove('date-different-month');
-          radioButton.value = "".concat(dateNumber, "/").concat(this.date.currentMonth + 1, "/").concat(this.date.currentYear);
+          radioButton.value = "".concat(this.date.currentYear, "-").concat(this.date.currentMonth + 1, "-").concat(dateNumber);
           radioButton.id = 'current-month-value_' + dateNumber;
           label.htmlFor = 'current-month-value_' + dateNumber;
+          dateInCalendar = new Date(this.date.currentYear, this.date.currentMonth, dateNumber);
           dateNumber++;
 
-          if (value == defaultCheckedValue && this.date.current.getMonth() === this.date.currentMonth) {
+          if (dateInCalendar === todaysDate) {
             radioButton.checked = true;
           }
         }
@@ -879,14 +881,61 @@ function () {
     key: "initialize",
     value: function initialize() {
       var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-      this.translations = Object(_i18n_all__WEBPACK_IMPORTED_MODULE_0__["getTranslations"])()[options.lang || 'en'];
-      console.log(this.translations);
-
-      this.date.onchange = options.onchange || function () {};
-
+      this.lang = options.lang || 'en';
+      this.translations = Object(_i18n_all__WEBPACK_IMPORTED_MODULE_0__["getTranslations"])()[this.lang];
+      this.date.onchange = this.setInputValue.bind(this);
+      this.format = options.format || 'dd/mm/yyyy';
       this.calendarBody = new _calendar_body_index__WEBPACK_IMPORTED_MODULE_1__["default"](this.translations);
       this.eventObserver.subscribe(this.calendarBody);
       this.createCalendar();
+      this.setAllFields();
+    }
+  }, {
+    key: "setInputValue",
+    value: function setInputValue(event) {
+      var datePicker = document.querySelector('#date-picker');
+      this.focusedElement.value = new Date(event.target.value).toLocaleDateString(this.lang);
+      this.focusedElement = null;
+      datePicker.style.display = 'none';
+      this.setDefaults();
+    }
+  }, {
+    key: "setAllFields",
+    value: function setAllFields() {
+      var _this = this;
+
+      var inputFields = document.querySelectorAll('input[data-datepicker]');
+      var datePicker = document.querySelector('#date-picker');
+      this.focused;
+      Element = null;
+      inputFields.forEach(function (input) {
+        input.onfocus = function (event) {
+          var rects = event.target.getBoundingClientRect();
+          _this.focusedElement = event.target;
+          datePicker.style.display = 'table';
+          datePicker.style.left = rects.left + 'px';
+          datePicker.style.top = event.target.offsetHeight + rects.top + 'px';
+
+          _this.setDefaults(); //todo: set value of calendar
+
+        };
+      });
+      this.hideIfOutsideBox();
+    }
+  }, {
+    key: "hideIfOutsideBox",
+    value: function hideIfOutsideBox() {
+      document.addEventListener('click', function (event) {
+        var datePicker = document.querySelector('#date-picker');
+        var focusedElement = document.querySelector('input[data-datepicker]:focus');
+
+        if (focusedElement || datePicker.contains(event.target)) {
+          return;
+        }
+
+        datePicker.style.display = 'none';
+        this.setDefaults();
+      }.bind(this));
     }
   }, {
     key: "setDefaults",
@@ -897,8 +946,8 @@ function () {
       this.updateCalendar();
     }
   }, {
-    key: "setDates",
-    value: function setDates() {
+    key: "setPreviousAndNextDates",
+    value: function setPreviousAndNextDates() {
       if (this.date.currentMonth === 0) {
         this.date.lastMonth = 11;
         this.date.lastYear = new Date(this.date.current.setYear(this.date.currentYear - 1)).getFullYear();
@@ -918,15 +967,15 @@ function () {
   }, {
     key: "updateCalendar",
     value: function updateCalendar() {
-      this.setDates();
+      this.setPreviousAndNextDates();
       this.setYearAndMonth();
       this.eventObserver.broadcast(this.date);
     }
   }, {
     key: "createCalendar",
     value: function createCalendar() {
-      var calenderElement = document.querySelector('#date-picker');
-      calenderElement.innerHTML = "<table>\n            <thead>\n                <tr id=\"month-switcher\">\n                    <th colspan=\"7\">\n                    <span id=\"month-prev-button\">\n                    <button><<</button><button><</button></span> <span id=\"monthName\"></span>\n                    <span id=\"selectedYear\"></span>\n                    <span id=\"month-next-button\"><button>></button><button>>></button></span>\n                    </th>\n                </tr>\n                <tr>\n                    <th colspan=\"7\"><span id=\"calendar-reset-button\"><a>".concat(this.translations.today, "</a></span></th>\n                </tr>\n                <tr>\n                    <th>").concat(this.translations.days.mon, "</th>\n                    <th>").concat(this.translations.days.tue, "</th>\n                    <th>").concat(this.translations.days.wed, "</th>\n                    <th>").concat(this.translations.days.thu, "</th>\n                    <th>").concat(this.translations.days.fri, "</th>\n                    <th>").concat(this.translations.days.sat, "</th>\n                    <th>").concat(this.translations.days.sun, "</th>\n                </tr>\n            </thead>\n            <tbody></tbody>\n        </table>");
+      var bodyElement = document.querySelector('body');
+      bodyElement.innerHTML += "<div id=\"date-picker\" style=\"display: none;\"><table>\n            <thead>\n                <tr id=\"month-switcher\">\n                    <th colspan=\"7\">\n                    <span id=\"month-prev-button\">\n                    <button><<</button><button><</button></span> <span id=\"monthName\"></span>\n                    <span id=\"selectedYear\"></span>\n                    <span id=\"month-next-button\"><button>></button><button>>></button></span>\n                    </th>\n                </tr>\n                <tr>\n                    <th colspan=\"7\"><span id=\"calendar-reset-button\"><a>".concat(this.translations.today, "</a></span></th>\n                </tr>\n                <tr>\n                    <th>").concat(this.translations.days.mon, "</th>\n                    <th>").concat(this.translations.days.tue, "</th>\n                    <th>").concat(this.translations.days.wed, "</th>\n                    <th>").concat(this.translations.days.thu, "</th>\n                    <th>").concat(this.translations.days.fri, "</th>\n                    <th>").concat(this.translations.days.sat, "</th>\n                    <th>").concat(this.translations.days.sun, "</th>\n                </tr>\n            </thead>\n            <tbody></tbody>\n        </table></div>");
       this.setButtons();
       this.calendarBody.createBody();
       this.setDefaults();
@@ -1065,6 +1114,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _en__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./en */ "./src/i18n/en.js");
 /* harmony import */ var _fr__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./fr */ "./src/i18n/fr.js");
 /* harmony import */ var _ja__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ja */ "./src/i18n/ja.js");
+/* harmony import */ var _de__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./de */ "./src/i18n/de.js");
+
 
 
 
@@ -1072,9 +1123,49 @@ function getTranslations() {
   return {
     en: _en__WEBPACK_IMPORTED_MODULE_0__["en"],
     fr: _fr__WEBPACK_IMPORTED_MODULE_1__["fr"],
-    ja: _ja__WEBPACK_IMPORTED_MODULE_2__["ja"]
+    ja: _ja__WEBPACK_IMPORTED_MODULE_2__["ja"],
+    de: _de__WEBPACK_IMPORTED_MODULE_3__["de"]
   };
 }
+
+/***/ }),
+
+/***/ "./src/i18n/de.js":
+/*!************************!*\
+  !*** ./src/i18n/de.js ***!
+  \************************/
+/*! exports provided: de */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "de", function() { return de; });
+var de = {
+  today: 'Heute',
+  days: {
+    mon: 'Mo',
+    tue: 'Di',
+    wed: 'Mi',
+    thu: 'Do',
+    fri: 'Fr',
+    sat: 'So',
+    sun: 'Sa'
+  },
+  months: {
+    january: 'Januar',
+    febuary: 'Februar',
+    march: 'März',
+    april: 'April',
+    may: 'Mai',
+    june: 'Juni',
+    july: 'Juli',
+    august: 'August',
+    september: 'September',
+    october: 'Oktober',
+    november: 'November',
+    december: 'Dezember'
+  }
+};
 
 /***/ }),
 
