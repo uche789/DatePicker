@@ -9,10 +9,9 @@ export default class DatePicker {
     }
 
     initialize (options = {}) {
-        this.lang = options.lang || 'en'
-        this.translations = getTranslations()[this.lang];
+        this.lang = options.lang;
+        this.translations = getTranslations()[this.lang || 'en'];
         this.date.onchange = this.setInputValue.bind(this);
-        this.format = options.format || 'dd/mm/yyyy'
 
         this.calendarBody = new CalendarBody(this.translations);
         this.eventObserver.subscribe(this.calendarBody);
@@ -22,7 +21,13 @@ export default class DatePicker {
 
     setInputValue (event) {
         let datePicker = document.querySelector('#date-picker');
-        this.focusedElement.value = (new Date(event.target.value)).toLocaleDateString(this.lang);
+        
+        if (typeof this.lang == 'string') {
+            this.focusedElement.value = (new Date(event.target.value)).toLocaleDateString(this.lang);
+        } else {
+            this.focusedElement.value = (new Date(event.target.value)).toLocaleDateString();
+        }
+        
         this.focusedElement = null;
         datePicker.style.display = 'none';
         this.setDefaults();
@@ -32,8 +37,7 @@ export default class DatePicker {
         let _this = this;
         let inputFields = document.querySelectorAll('input[data-datepicker]');
         let datePicker = document.querySelector('#date-picker');
-        this.focused
-        Element = null;
+        this.focusedElement = null;
 
         inputFields.forEach(input => {
             input.onfocus = function (event) {
@@ -44,8 +48,6 @@ export default class DatePicker {
                 datePicker.style.left = rects.left + 'px';
                 datePicker.style.top = (event.target.offsetHeight + rects.top) + 'px';
                 _this.setDefaults();
-
-                //todo: set value of calendar
             };
         });
 
