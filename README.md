@@ -2,10 +2,10 @@
 
 ## Tools used
 * Webpack
-* ECMAScript 6
+* Babel + ECMAScript 6
 
 ## Objective of this project
-To test out webpack and observer pattern.
+Experiment with webpack, observer pattern and modules.
 
 ## Setup
 Include the bundle
@@ -18,8 +18,8 @@ Initialize calendar
 
 ```
     var datePicker = new Calendar.DatePicker();
-        datePicker.initialize({});
+    datePicker.initialize({});
 ```
 
 **Options**
-* Lang: include any locale or the equivalent short code.
+* Lang: include any locale or the equivalent short code. These two-letter ISO will change the format of the date output and the display language: ja, en, de, fr
