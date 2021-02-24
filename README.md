@@ -1,6 +1,5 @@
 ### DATE PICKER
 
-## Tools used
 * Webpack
 * Babel + ECMAScript 6
 

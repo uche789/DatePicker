@@ -1,24 +1,32 @@
 export class EventObserver {
-    constructor() {
-        this.type = ''
-        this.callback = () => {}
+    constructor(type = '', callback = () => {}) {
+        this.type = type;
+        this.callback = callback
     }
 }
 
-export default class EventHandler {
+export class EventHandler {
     constructor() {
         this.observers = [];
     }
 
     subscribe(observer) {
+        if (!(observer instanceof EventObserver)) {
+            throw new Error('Invalid argument: Observer');
+        }
         this.observers.push(observer);
     }
 
     unsubscribe(observer) {
+        if (!(observer instanceof EventObserver)) {
+            throw new Error('Invalid argument: Observer');
+        }
         this.observers.filter(instance => observer != instance);
     }
 
-    broadcast(changes) {
-        this.observers.forEach(observers => observers.update(changes))
+    broadcast(observerType, changes) {
+        this.observers
+            .filter(observer => observer.type === observerType)
+            .forEach(observer => observer.callback(changes))
     }
 }

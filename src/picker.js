@@ -1,6 +1,6 @@
 import { getTranslations } from './i18n/all';
 import CalendarBody from './calendarBody';
-import EventHandler from './events';
+import { EventHandler, EventObserver } from './events';
 
 export default class DatePicker {
     constructor () {
@@ -8,13 +8,21 @@ export default class DatePicker {
         this.date = {};
     }
 
-    initialize ({defaultValue = null, lang = ''}) {
+    initialize ({
+        defaultValue = null,
+        lang = '',
+        dateChanged = () => {}
+    }) {
         if (defaultValue && !(defaultValue instanceof Date)) {
             throw new Error('Invalid argument: Date');
         }
 
         if (typeof lang !== 'string'){
-            throw new Error('Invalid argument: String');
+            throw new Error('Invalid argument: string');
+        }
+
+        if (typeof dateChanged !== 'function') {
+            throw new Error('Invalid argument: functon');
         }
 
         this.date.selectedDate = defaultValue || new Date()
@@ -23,7 +31,9 @@ export default class DatePicker {
         this.date.onchange = this.setInputValue.bind(this);
 
         this.calendarBody = new CalendarBody();
-        this.eventHandler.subscribe(this.calendarBody);
+        const observer = new EventObserver('calendar-update', this.calendarBody.update.bind(this.calendarBody));
+        this.eventHandler.subscribe(observer);
+        this.dateChanged = dateChanged
         this.createCalendar();
         this.setPickerFields();
     }
@@ -37,7 +47,9 @@ export default class DatePicker {
     }
 
     setInputValue(event) {
-        this.setDefaultInputValue(new Date(event.target.value), this.focusedElement);
+        const date = new Date(event.target.value);
+        this.setDefaultInputValue(date, this.focusedElement);
+        this.dateChanged(date);
         this.focusedElement = null;
 
         const datePicker = document.querySelector('#sdp-date-picker');        
@@ -110,7 +122,7 @@ export default class DatePicker {
     updateCalendar() {
         this.setPreviousAndNextDates();
         this.setMonthYearText();
-        this.eventHandler.broadcast(this.date);
+        this.eventHandler.broadcast('calendar-update', this.date);
     }
 
     createCalendar() {

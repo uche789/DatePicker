@@ -15,7 +15,10 @@
     <script>
         var datePicker = new Calendar.DatePicker();
         datePicker.initialize({
-            lang: 'en'
+            lang: 'en',
+            dateChanged: function (data) {
+                console.log(data)
+            }
         });
     </script>
 </body>
