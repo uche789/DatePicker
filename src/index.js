@@ -1,4 +1,4 @@
-import DatePicker from './date-picker/index';
+import DatePicker from './picker';
+import './main.scss';
 
-require('./main.scss');
 export { DatePicker };

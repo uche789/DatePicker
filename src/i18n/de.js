@@ -6,8 +6,8 @@ export const de = {
         wed: 'Mi',
         thu: 'Do',
         fri: 'Fr',
-        sat: 'So',
-        sun: 'Sa'
+        sat: 'Sa',
+        sun: 'So'
     },
     months: {
         january: 'Januar',

@@ -1,50 +1,54 @@
-#date-picker {
+#sdp-date-picker {
     position: absolute;
     background-color: white;
-    box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.5);
-
-    table {
-        min-width: 210px;
-    }
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);
  
-    .date-different-month {
+    .sdp-different-month {
          color: lightgray
      }
  
-     input[name="date-input-value"] {
+     input[name="sdp-date-value"] {
          display: none;
  
-         & + label > div {
-             width: 100%;
-             height: auto;
+         & + div {
+             width: 24px;
+             height: 24px;
              border-radius: 50%;
-             text-align: center; 
+             display: flex;
+             justify-content: center;
+             align-items: center;
          }
-         
-         
+
+         &:checked + div {
+            background-color: lightgray;
+        }
+        
+        &:not(:checked):hover + div {
+            background-color: lightblue;
+        }
      }
  
-     input[name="date-input-value"]:checked + label > div {
-         background-color: lightgray;
-     }
-
-     #month-next-button {
+     #sdp-month-next-button {
          float: right;
      }
 
-     #month-prev-button {
+     #sdp-month-prev-button {
          float: left;
      }
  }
 
- #calendar-reset-button {
-    a {
-        font-weight: normal;
-        cursor: pointer;    
-    }
+ #spd-monthYear {
+     padding: 0 10px;
+ }
+
+#spd-reset-button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    outline: none;
 }
 
-#month-switcher {
+#sdp-month-switcher {
     a {
         font-weight: normal;
         cursor: pointer;
