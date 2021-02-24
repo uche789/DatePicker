@@ -21,7 +21,7 @@ export class EventHandler {
         if (!(observer instanceof EventObserver)) {
             throw new Error('Invalid argument: Observer');
         }
-        this.observers.filter(instance => observer != instance);
+        this.observers = this.observers.filter(instance => observer != instance);
     }
 
     broadcast(observerType, changes) {

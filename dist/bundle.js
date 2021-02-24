@@ -1,2 +1,1420 @@
-var Calendar=function(t){var e={};function n(r){if(e[r])return e[r].exports;var a=e[r]={i:r,l:!1,exports:{}};return t[r].call(a.exports,a,a.exports,n),a.l=!0,a.exports}return n.m=t,n.c=e,n.d=function(t,e,r){n.o(t,e)||Object.defineProperty(t,e,{enumerable:!0,get:r})},n.r=function(t){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(t,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(t,"__esModule",{value:!0})},n.t=function(t,e){if(1&e&&(t=n(t)),8&e)return t;if(4&e&&"object"==typeof t&&t&&t.__esModule)return t;var r=Object.create(null);if(n.r(r),Object.defineProperty(r,"default",{enumerable:!0,value:t}),2&e&&"string"!=typeof t)for(var a in t)n.d(r,a,function(e){return t[e]}.bind(null,a));return r},n.n=function(t){var e=t&&t.__esModule?function(){return t.default}:function(){return t};return n.d(e,"a",e),e},n.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},n.p="",n(n.s=0)}([function(t,e,n){t.exports=n(6)},function(t,e,n){var r=n(2);"string"==typeof r&&(r=[[t.i,r,""]]);var a={hmr:!0,transform:void 0,insertInto:void 0};n(4)(r,a);r.locals&&(t.exports=r.locals)},function(t,e,n){(t.exports=n(3)(!1)).push([t.i,'#sdp-date-picker{position:absolute;background-color:white;box-shadow:1px 1px 1px 1px rgba(0,0,0,0.5)}#sdp-date-picker .sdp-different-month{color:lightgray}#sdp-date-picker input[name="sdp-date-value"]{display:none}#sdp-date-picker input[name="sdp-date-value"]+div{width:24px;height:24px;border-radius:50%;display:flex;justify-content:center;align-items:center}#sdp-date-picker input[name="sdp-date-value"]:checked+div{background-color:lightgray}#sdp-date-picker input[name="sdp-date-value"]:not(:checked):hover+div{background-color:lightblue}#sdp-date-picker #sdp-month-next-button{float:right}#sdp-date-picker #sdp-month-prev-button{float:left}#spd-monthYear{padding:0 10px}#spd-reset-button{border:none;background-color:transparent;cursor:pointer;outline:none}#sdp-month-switcher a{font-weight:normal;cursor:pointer}\n',""])},function(t,e){t.exports=function(t){var e=[];return e.toString=function(){return this.map((function(e){var n=function(t,e){var n=t[1]||"",r=t[3];if(!r)return n;if(e&&"function"==typeof btoa){var a=(i=r,"/*# sourceMappingURL=data:application/json;charset=utf-8;base64,"+btoa(unescape(encodeURIComponent(JSON.stringify(i))))+" */"),o=r.sources.map((function(t){return"/*# sourceURL="+r.sourceRoot+t+" */"}));return[n].concat(o).concat([a]).join("\n")}var i;return[n].join("\n")}(e,t);return e[2]?"@media "+e[2]+"{"+n+"}":n})).join("")},e.i=function(t,n){"string"==typeof t&&(t=[[null,t,""]]);for(var r={},a=0;a<this.length;a++){var o=this[a][0];"number"==typeof o&&(r[o]=!0)}for(a=0;a<t.length;a++){var i=t[a];"number"==typeof i[0]&&r[i[0]]||(n&&!i[2]?i[2]=n:n&&(i[2]="("+i[2]+") and ("+n+")"),e.push(i))}},e}},function(t,e,n){var r,a,o={},i=(r=function(){return window&&document&&document.all&&!window.atob},function(){return void 0===a&&(a=r.apply(this,arguments)),a}),s=function(t,e){return e?e.querySelector(t):document.querySelector(t)},u=function(t){var e={};return function(t,n){if("function"==typeof t)return t();if(void 0===e[t]){var r=s.call(this,t,n);if(window.HTMLIFrameElement&&r instanceof window.HTMLIFrameElement)try{r=r.contentDocument.head}catch(t){r=null}e[t]=r}return e[t]}}(),c=null,d=0,l=[],h=n(5);function f(t,e){for(var n=0;n<t.length;n++){var r=t[n],a=o[r.id];if(a){a.refs++;for(var i=0;i<a.parts.length;i++)a.parts[i](r.parts[i]);for(;i<r.parts.length;i++)a.parts.push(g(r.parts[i],e))}else{var s=[];for(i=0;i<r.parts.length;i++)s.push(g(r.parts[i],e));o[r.id]={id:r.id,refs:1,parts:s}}}}function p(t,e){for(var n=[],r={},a=0;a<t.length;a++){var o=t[a],i=e.base?o[0]+e.base:o[0],s={css:o[1],media:o[2],sourceMap:o[3]};r[i]?r[i].parts.push(s):n.push(r[i]={id:i,parts:[s]})}return n}function v(t,e){var n=u(t.insertInto);if(!n)throw new Error("Couldn't find a style target. This probably means that the value for the 'insertInto' parameter is invalid.");var r=l[l.length-1];if("top"===t.insertAt)r?r.nextSibling?n.insertBefore(e,r.nextSibling):n.appendChild(e):n.insertBefore(e,n.firstChild),l.push(e);else if("bottom"===t.insertAt)n.appendChild(e);else{if("object"!=typeof t.insertAt||!t.insertAt.before)throw new Error("[Style Loader]\n\n Invalid value for parameter 'insertAt' ('options.insertAt') found.\n Must be 'top', 'bottom', or Object.\n (https://github.com/webpack-contrib/style-loader#insertat)\n");var a=u(t.insertAt.before,n);n.insertBefore(e,a)}}function b(t){if(null===t.parentNode)return!1;t.parentNode.removeChild(t);var e=l.indexOf(t);e>=0&&l.splice(e,1)}function m(t){var e=document.createElement("style");if(void 0===t.attrs.type&&(t.attrs.type="text/css"),void 0===t.attrs.nonce){var r=function(){0;return n.nc}();r&&(t.attrs.nonce=r)}return y(e,t.attrs),v(t,e),e}function y(t,e){Object.keys(e).forEach((function(n){t.setAttribute(n,e[n])}))}function g(t,e){var n,r,a,o;if(e.transform&&t.css){if(!(o="function"==typeof e.transform?e.transform(t.css):e.transform.default(t.css)))return function(){};t.css=o}if(e.singleton){var i=d++;n=c||(c=m(e)),r=x.bind(null,n,i,!1),a=x.bind(null,n,i,!0)}else t.sourceMap&&"function"==typeof URL&&"function"==typeof URL.createObjectURL&&"function"==typeof URL.revokeObjectURL&&"function"==typeof Blob&&"function"==typeof btoa?(n=function(t){var e=document.createElement("link");return void 0===t.attrs.type&&(t.attrs.type="text/css"),t.attrs.rel="stylesheet",y(e,t.attrs),v(t,e),e}(e),r=D.bind(null,n,e),a=function(){b(n),n.href&&URL.revokeObjectURL(n.href)}):(n=m(e),r=M.bind(null,n),a=function(){b(n)});return r(t),function(e){if(e){if(e.css===t.css&&e.media===t.media&&e.sourceMap===t.sourceMap)return;r(t=e)}else a()}}t.exports=function(t,e){if("undefined"!=typeof DEBUG&&DEBUG&&"object"!=typeof document)throw new Error("The style-loader cannot be used in a non-browser environment");(e=e||{}).attrs="object"==typeof e.attrs?e.attrs:{},e.singleton||"boolean"==typeof e.singleton||(e.singleton=i()),e.insertInto||(e.insertInto="head"),e.insertAt||(e.insertAt="bottom");var n=p(t,e);return f(n,e),function(t){for(var r=[],a=0;a<n.length;a++){var i=n[a];(s=o[i.id]).refs--,r.push(s)}t&&f(p(t,e),e);for(a=0;a<r.length;a++){var s;if(0===(s=r[a]).refs){for(var u=0;u<s.parts.length;u++)s.parts[u]();delete o[s.id]}}}};var w,k=(w=[],function(t,e){return w[t]=e,w.filter(Boolean).join("\n")});function x(t,e,n,r){var a=n?"":r.css;if(t.styleSheet)t.styleSheet.cssText=k(e,a);else{var o=document.createTextNode(a),i=t.childNodes;i[e]&&t.removeChild(i[e]),i.length?t.insertBefore(o,i[e]):t.appendChild(o)}}function M(t,e){var n=e.css,r=e.media;if(r&&t.setAttribute("media",r),t.styleSheet)t.styleSheet.cssText=n;else{for(;t.firstChild;)t.removeChild(t.firstChild);t.appendChild(document.createTextNode(n))}}function D(t,e,n){var r=n.css,a=n.sourceMap,o=void 0===e.convertToAbsoluteUrls&&a;(e.convertToAbsoluteUrls||o)&&(r=h(r)),a&&(r+="\n/*# sourceMappingURL=data:application/json;base64,"+btoa(unescape(encodeURIComponent(JSON.stringify(a))))+" */");var i=new Blob([r],{type:"text/css"}),s=t.href;t.href=URL.createObjectURL(i),s&&URL.revokeObjectURL(s)}},function(t,e){t.exports=function(t){var e="undefined"!=typeof window&&window.location;if(!e)throw new Error("fixUrls requires window.location");if(!t||"string"!=typeof t)return t;var n=e.protocol+"//"+e.host,r=n+e.pathname.replace(/\/[^\/]*$/,"/");return t.replace(/url\s*\(((?:[^)(]|\((?:[^)(]+|\([^)(]*\))*\))*)\)/gi,(function(t,e){var a,o=e.trim().replace(/^"(.*)"$/,(function(t,e){return e})).replace(/^'(.*)'$/,(function(t,e){return e}));return/^(#|data:|http:\/\/|https:\/\/|file:\/\/\/|\s*$)/i.test(o)?t:(a=0===o.indexOf("//")?o:0===o.indexOf("/")?n+o:r+o.replace(/^\.\//,""),"url("+JSON.stringify(a)+")")}))}},function(t,e,n){"use strict";n.r(e),n.d(e,"DatePicker",(function(){return m}));var r={today:"Today",days:{mon:"Mon",tue:"Tue",wed:"Wed",thu:"Thu",fri:"Fri",sat:"Sat",sun:"Sun"},months:{january:"January",febuary:"Febuary",march:"March",april:"April",may:"May",june:"June",july:"July",august:"August",september:"September",october:"October",november:"November",december:"December"}},a={today:"Au jourd'hui",days:{mon:"Lun",tue:"Mar",wed:"Mer",thu:"Jeu",fri:"Ven",sat:"Sam",sun:"Dim"},months:{january:"Janvier",febuary:"Février",march:"Mars",april:"April",may:"Mai",june:"Juin",july:"Julliet",august:"Août",september:"Septembre",october:"Octobre",november:"Novembre",december:"Décembre"}},o={today:"今日",days:{mon:"月",tue:"火",wed:"水",thu:"木",fri:"金",sat:"土",sun:"日"},months:{january:"一月",febuary:"二月",march:"三月",april:"四月",may:"五月",june:"六月",july:"七月",august:"八月",september:"九月",october:"十月",november:"十一月",december:"十二月"}},i={today:"Heute",days:{mon:"Mo",tue:"Di",wed:"Mi",thu:"Do",fri:"Fr",sat:"Sa",sun:"So"},months:{january:"Januar",febuary:"Februar",march:"März",april:"April",may:"Mai",june:"Juni",july:"Juli",august:"August",september:"September",october:"Oktober",november:"November",december:"Dezember"}};function s(t,e){for(var n=0;n<e.length;n++){var r=e[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(t,r.key,r)}}var u=0,c=1,d=2,l=function(){function t(){!function(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}(this,t),this.date={}}var e,n,r;return e=t,(n=[{key:"createBody",value:function(){for(var t=document.querySelector("#sdp-date-picker tbody"),e=1;e<=6;e++){for(var n=document.createElement("tr"),r=1;r<=7;r++){var a=document.createElement("td");a.innerText="x",n.appendChild(a)}t.appendChild(n)}}},{key:"generate",value:function(){var t=document.querySelectorAll("#sdp-date-picker tbody td"),e=this.getNumberOfDays(c),n=1,r=new Date(this.date.currentYear,this.date.currentMonth,1).getDay()-1,a=this.getNumberOfDays(u),o=1;a-=(r=r>-1?r:6)-1;for(var i=0;i<t.length;i++){var s=0,d=document.createElement("input"),l=document.createElement("label");if(t[i].innerHTML="",d.type="radio",d.name="sdp-date-value",d.onchange=this.date.onchange,1!==n&&n!==e+1||(r>i&&(s=a,d.value="".concat(this.date.lastYear,"-").concat(this.date.lastMonth+1,"-").concat(a),l.innerText=a,d.id="sdp-last-month-value_"+a,l.htmlFor="sdp-last-month-value_"+a,a++),n>e&&(s=o,d.value="".concat(this.date.nextYear,"-").concat(this.date.nextMonth+1,"-").concat(o),l.innerText=o,d.id="sdp-next-month-value_"+o,l.htmlFor="sdp-next-month-value_"+o,o++),t[i].classList.add("sdp-different-month")),r===i||n>1&&n<=e){s=n;var h=this.date,f=h.selectedDate,p=h.currentMonth,v=h.currentYear;t[i].classList.remove("sdp-different-month"),d.value="".concat(v,"-").concat(p+1,"-").concat(n),d.id="sdp-current-month-value_"+n,l.htmlFor="sdp-current-month-value_"+n,f.getDate()===n&&f.getMonth()+1===p+1&&f.getFullYear()===v&&(d.checked=!0),n++}l.innerHTML="".concat(s);var b=document.createElement("div");b.append(l),t[i].appendChild(d),t[i].appendChild(b)}}},{key:"update",value:function(t){this.date=Object.assign({},t),this.generate()}},{key:"getNumberOfDays",value:function(t){return t===c?new Date(this.date.currentYear,this.date.currentMonth+1,0).getDate():t===u?new Date(this.date.lastYear||this.date.currentYear,this.date.lastMonth+1,0).getDate():t===d?new Date(this.date.nextYear||this.date.currentYear,this.date.nextMonth+1,0).getDate():void 0}}])&&s(e.prototype,n),r&&s(e,r),t}();function h(t,e){for(var n=0;n<e.length;n++){var r=e[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(t,r.key,r)}}function f(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}var p=function t(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:"",n=arguments.length>1&&void 0!==arguments[1]?arguments[1]:function(){};f(this,t),this.type=e,this.callback=n},v=function(){function t(){f(this,t),this.observers=[]}var e,n,r;return e=t,(n=[{key:"subscribe",value:function(t){if(!(t instanceof p))throw new Error("Invalid argument: Observer");this.observers.push(t)}},{key:"unsubscribe",value:function(t){if(!(t instanceof p))throw new Error("Invalid argument: Observer");this.observers.filter((function(e){return t!=e}))}},{key:"broadcast",value:function(t,e){this.observers.filter((function(e){return e.type===t})).forEach((function(t){return t.callback(e)}))}}])&&h(e.prototype,n),r&&h(e,r),t}();function b(t,e){for(var n=0;n<e.length;n++){var r=e[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(t,r.key,r)}}var m=function(){function t(){!function(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}(this,t),this.eventHandler=new v,this.date={}}var e,n,s;return e=t,(n=[{key:"initialize",value:function(t){var e=t.defaultValue,n=void 0===e?null:e,s=t.lang,u=void 0===s?"":s,c=t.dateChanged,d=void 0===c?function(){}:c;if(n&&!(n instanceof Date))throw new Error("Invalid argument: Date");if("string"!=typeof u)throw new Error("Invalid argument: string");if("function"!=typeof d)throw new Error("Invalid argument: functon");this.date.selectedDate=n||new Date,this.lang=u,this.translations={en:r,fr:a,ja:o,de:i}[this.lang||"en"],this.date.onchange=this.setInputValue.bind(this),this.calendarBody=new l;var h=new p("calendar-update",this.calendarBody.update.bind(this.calendarBody));this.eventHandler.subscribe(h),this.dateChanged=d,this.createCalendar(),this.setPickerFields()}},{key:"setDefaultInputValue",value:function(t,e){this.lang?e.value=t.toLocaleDateString(this.lang):e.value=t.toLocaleDateString()}},{key:"setInputValue",value:function(t){var e=new Date(t.target.value);this.setDefaultInputValue(e,this.focusedElement),this.dateChanged(e),this.focusedElement=null,document.querySelector("#sdp-date-picker").style.display="none"}},{key:"setPickerFields",value:function(){var t=this,e=document.querySelectorAll("input[data-datepicker]"),n=document.querySelector("#sdp-date-picker");this.focusedElement=null,e.forEach((function(e){e.setAttribute("readonly",!0),t.setDefaultInputValue(t.date.selectedDate,e),e.onfocus=function(e){var r=e.target.getBoundingClientRect();t.focusedElement=e.target,n.style.display="table",n.style.left=r.left+"px",n.style.top=e.target.offsetHeight+r.top+"px",t.setDefaults(e.target.value)}})),this.hideIfOutsideBox()}},{key:"hideIfOutsideBox",value:function(){document.addEventListener("click",(function(t){var e=document.querySelector("#sdp-date-picker");document.querySelector("input[data-datepicker]:focus")||e.contains(t.target)||(e.style.display="none")}))}},{key:"setDefaults",value:function(t){t&&(this.date.selectedDate=new Date(t)),this.date.current=t?new Date(t):new Date,this.date.currentYear=this.date.current.getFullYear(),this.date.currentMonth=this.date.current.getMonth(),this.updateCalendar()}},{key:"setPreviousAndNextDates",value:function(){0===this.date.currentMonth?this.date.lastMonth=11:this.date.lastMonth=this.date.currentMonth-1,this.date.currentMonth>=11?this.date.nextMonth=0:this.date.nextMonth=this.date.currentMonth+1,this.date.lastYear=new Date(this.date.current.setYear(this.date.currentYear-1)).getFullYear(),this.date.nextYear=new Date(this.date.current.setYear(this.date.currentYear+1)).getFullYear()}},{key:"updateCalendar",value:function(){this.setPreviousAndNextDates(),this.setMonthYearText(),this.eventHandler.broadcast("calendar-update",this.date)}},{key:"createCalendar",value:function(){var t=document.querySelector("body"),e=Object.values(this.translations.days).map((function(t){return"<th>".concat(t,"</th>")}));t.innerHTML+='\n        <div id="sdp-date-picker" style="display: none;">\n            <table>\n                <thead>\n                    <tr id="spd-month-switcher">\n                        <th colspan="7">\n                            <span id="sdp-month-prev-button">\n                                <button><<</button><button><</button>\n                            </span>\n                            <span id="spd-monthYear"></span>\n                            <span id="sdp-month-next-button">\n                                <button>></button><button>>></button>\n                            </span>\n                        </th>\n                    </tr>\n                    <tr>\n                        <th colspan="7"><button id="spd-reset-button">'.concat(this.translations.today,"</button></th>\n                    </tr>\n                    <tr>").concat(e.join(""),"</tr>\n                </thead>\n                <tbody></tbody>\n            </table>\n        </div>"),this.setButtons(),this.calendarBody.createBody(),this.setDefaults()}},{key:"setButtons",value:function(){var t=this,e=document.querySelector("#sdp-month-prev-button button:first-child"),n=document.querySelector("#sdp-month-prev-button button:nth-child(2)"),r=document.querySelector("#sdp-month-next-button button:nth-child(2)"),a=document.querySelector("#sdp-month-next-button button:first-child"),o=document.querySelector("#spd-reset-button");n.onclick=this.goToPrevMonth.bind(this),e.onclick=this.goToPrevYear.bind(this),r.onclick=this.goToNextYear.bind(this),a.onclick=this.goToNextMonth.bind(this),o.onclick=function(){return t.setDefaults()}}},{key:"goToPrevYear",value:function(){this.date.currentYear--,this.updateCalendar()}},{key:"goToNextYear",value:function(){this.date.currentYear++,this.updateCalendar()}},{key:"goToPrevMonth",value:function(){0===this.date.currentMonth?(this.date.currentMonth=11,this.date.currentYear=new Date(this.date.current.setYear(this.date.currentYear-1)).getFullYear()):this.date.currentMonth--,this.date.current=new Date(this.date.currentYear,this.date.currentMonth,1),this.updateCalendar()}},{key:"goToNextMonth",value:function(){this.date.currentMonth>=11?(this.date.currentMonth=0,this.date.currentYear=new Date(this.date.current.setYear(this.date.currentYear+1)).getFullYear()):this.date.currentMonth++,this.date.current=new Date(this.date.currentYear,this.date.currentMonth,1),this.updateCalendar()}},{key:"setMonthYearText",value:function(){var t=Object.values(this.translations.months);document.getElementById("spd-monthYear").innerText="".concat(t[this.date.currentMonth]," ").concat(this.date.currentYear)}}])&&b(e.prototype,n),s&&b(e,s),t}();n(1)}]);
+var Calendar =
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/sass-loader/dist/cjs.js!./src/main.scss":
+/*!****************************************************************************************!*\
+  !*** ./node_modules/css-loader!./node_modules/sass-loader/dist/cjs.js!./src/main.scss ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "#sdp-date-picker {\n  position: absolute;\n  background-color: white;\n  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.5); }\n  #sdp-date-picker .sdp-different-month {\n    color: lightgray; }\n  #sdp-date-picker input[name=\"sdp-date-value\"] {\n    display: none; }\n    #sdp-date-picker input[name=\"sdp-date-value\"] + div {\n      width: 24px;\n      height: 24px;\n      border-radius: 50%;\n      display: flex;\n      justify-content: center;\n      align-items: center; }\n    #sdp-date-picker input[name=\"sdp-date-value\"]:checked + div {\n      background-color: lightgray; }\n    #sdp-date-picker input[name=\"sdp-date-value\"]:not(:checked):hover + div {\n      background-color: lightblue; }\n  #sdp-date-picker #sdp-month-next-button {\n    float: right; }\n  #sdp-date-picker #sdp-month-prev-button {\n    float: left; }\n\n#spd-monthYear {\n  padding: 0 10px; }\n\n#spd-reset-button {\n  border: none;\n  background-color: transparent;\n  cursor: pointer;\n  outline: none; }\n\n#sdp-month-switcher a {\n  font-weight: normal;\n  cursor: pointer; }\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/lib/css-base.js":
+/*!*************************************************!*\
+  !*** ./node_modules/css-loader/lib/css-base.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function(useSourceMap) {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		return this.map(function (item) {
+			var content = cssWithMappingToString(item, useSourceMap);
+			if(item[2]) {
+				return "@media " + item[2] + "{" + content + "}";
+			} else {
+				return content;
+			}
+		}).join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+	var content = item[1] || '';
+	var cssMapping = item[3];
+	if (!cssMapping) {
+		return content;
+	}
+
+	if (useSourceMap && typeof btoa === 'function') {
+		var sourceMapping = toComment(cssMapping);
+		var sourceURLs = cssMapping.sources.map(function (source) {
+			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
+		});
+
+		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+	}
+
+	return [content].join('\n');
+}
+
+// Adapted from convert-source-map (MIT)
+function toComment(sourceMap) {
+	// eslint-disable-next-line no-undef
+	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
+
+	return '/*# ' + data + ' */';
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/lib/addStyles.js":
+/*!****************************************************!*\
+  !*** ./node_modules/style-loader/lib/addStyles.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+
+var stylesInDom = {};
+
+var	memoize = function (fn) {
+	var memo;
+
+	return function () {
+		if (typeof memo === "undefined") memo = fn.apply(this, arguments);
+		return memo;
+	};
+};
+
+var isOldIE = memoize(function () {
+	// Test for IE <= 9 as proposed by Browserhacks
+	// @see http://browserhacks.com/#hack-e71d8692f65334173fee715c222cb805
+	// Tests for existence of standard globals is to allow style-loader
+	// to operate correctly into non-standard environments
+	// @see https://github.com/webpack-contrib/style-loader/issues/177
+	return window && document && document.all && !window.atob;
+});
+
+var getTarget = function (target, parent) {
+  if (parent){
+    return parent.querySelector(target);
+  }
+  return document.querySelector(target);
+};
+
+var getElement = (function (fn) {
+	var memo = {};
+
+	return function(target, parent) {
+                // If passing function in options, then use it for resolve "head" element.
+                // Useful for Shadow Root style i.e
+                // {
+                //   insertInto: function () { return document.querySelector("#foo").shadowRoot }
+                // }
+                if (typeof target === 'function') {
+                        return target();
+                }
+                if (typeof memo[target] === "undefined") {
+			var styleTarget = getTarget.call(this, target, parent);
+			// Special case to return head of iframe instead of iframe itself
+			if (window.HTMLIFrameElement && styleTarget instanceof window.HTMLIFrameElement) {
+				try {
+					// This will throw an exception if access to iframe is blocked
+					// due to cross-origin restrictions
+					styleTarget = styleTarget.contentDocument.head;
+				} catch(e) {
+					styleTarget = null;
+				}
+			}
+			memo[target] = styleTarget;
+		}
+		return memo[target]
+	};
+})();
+
+var singleton = null;
+var	singletonCounter = 0;
+var	stylesInsertedAtTop = [];
+
+var	fixUrls = __webpack_require__(/*! ./urls */ "./node_modules/style-loader/lib/urls.js");
+
+module.exports = function(list, options) {
+	if (typeof DEBUG !== "undefined" && DEBUG) {
+		if (typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
+	}
+
+	options = options || {};
+
+	options.attrs = typeof options.attrs === "object" ? options.attrs : {};
+
+	// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+	// tags it will allow on a page
+	if (!options.singleton && typeof options.singleton !== "boolean") options.singleton = isOldIE();
+
+	// By default, add <style> tags to the <head> element
+        if (!options.insertInto) options.insertInto = "head";
+
+	// By default, add <style> tags to the bottom of the target
+	if (!options.insertAt) options.insertAt = "bottom";
+
+	var styles = listToStyles(list, options);
+
+	addStylesToDom(styles, options);
+
+	return function update (newList) {
+		var mayRemove = [];
+
+		for (var i = 0; i < styles.length; i++) {
+			var item = styles[i];
+			var domStyle = stylesInDom[item.id];
+
+			domStyle.refs--;
+			mayRemove.push(domStyle);
+		}
+
+		if(newList) {
+			var newStyles = listToStyles(newList, options);
+			addStylesToDom(newStyles, options);
+		}
+
+		for (var i = 0; i < mayRemove.length; i++) {
+			var domStyle = mayRemove[i];
+
+			if(domStyle.refs === 0) {
+				for (var j = 0; j < domStyle.parts.length; j++) domStyle.parts[j]();
+
+				delete stylesInDom[domStyle.id];
+			}
+		}
+	};
+};
+
+function addStylesToDom (styles, options) {
+	for (var i = 0; i < styles.length; i++) {
+		var item = styles[i];
+		var domStyle = stylesInDom[item.id];
+
+		if(domStyle) {
+			domStyle.refs++;
+
+			for(var j = 0; j < domStyle.parts.length; j++) {
+				domStyle.parts[j](item.parts[j]);
+			}
+
+			for(; j < item.parts.length; j++) {
+				domStyle.parts.push(addStyle(item.parts[j], options));
+			}
+		} else {
+			var parts = [];
+
+			for(var j = 0; j < item.parts.length; j++) {
+				parts.push(addStyle(item.parts[j], options));
+			}
+
+			stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
+		}
+	}
+}
+
+function listToStyles (list, options) {
+	var styles = [];
+	var newStyles = {};
+
+	for (var i = 0; i < list.length; i++) {
+		var item = list[i];
+		var id = options.base ? item[0] + options.base : item[0];
+		var css = item[1];
+		var media = item[2];
+		var sourceMap = item[3];
+		var part = {css: css, media: media, sourceMap: sourceMap};
+
+		if(!newStyles[id]) styles.push(newStyles[id] = {id: id, parts: [part]});
+		else newStyles[id].parts.push(part);
+	}
+
+	return styles;
+}
+
+function insertStyleElement (options, style) {
+	var target = getElement(options.insertInto)
+
+	if (!target) {
+		throw new Error("Couldn't find a style target. This probably means that the value for the 'insertInto' parameter is invalid.");
+	}
+
+	var lastStyleElementInsertedAtTop = stylesInsertedAtTop[stylesInsertedAtTop.length - 1];
+
+	if (options.insertAt === "top") {
+		if (!lastStyleElementInsertedAtTop) {
+			target.insertBefore(style, target.firstChild);
+		} else if (lastStyleElementInsertedAtTop.nextSibling) {
+			target.insertBefore(style, lastStyleElementInsertedAtTop.nextSibling);
+		} else {
+			target.appendChild(style);
+		}
+		stylesInsertedAtTop.push(style);
+	} else if (options.insertAt === "bottom") {
+		target.appendChild(style);
+	} else if (typeof options.insertAt === "object" && options.insertAt.before) {
+		var nextSibling = getElement(options.insertAt.before, target);
+		target.insertBefore(style, nextSibling);
+	} else {
+		throw new Error("[Style Loader]\n\n Invalid value for parameter 'insertAt' ('options.insertAt') found.\n Must be 'top', 'bottom', or Object.\n (https://github.com/webpack-contrib/style-loader#insertat)\n");
+	}
+}
+
+function removeStyleElement (style) {
+	if (style.parentNode === null) return false;
+	style.parentNode.removeChild(style);
+
+	var idx = stylesInsertedAtTop.indexOf(style);
+	if(idx >= 0) {
+		stylesInsertedAtTop.splice(idx, 1);
+	}
+}
+
+function createStyleElement (options) {
+	var style = document.createElement("style");
+
+	if(options.attrs.type === undefined) {
+		options.attrs.type = "text/css";
+	}
+
+	if(options.attrs.nonce === undefined) {
+		var nonce = getNonce();
+		if (nonce) {
+			options.attrs.nonce = nonce;
+		}
+	}
+
+	addAttrs(style, options.attrs);
+	insertStyleElement(options, style);
+
+	return style;
+}
+
+function createLinkElement (options) {
+	var link = document.createElement("link");
+
+	if(options.attrs.type === undefined) {
+		options.attrs.type = "text/css";
+	}
+	options.attrs.rel = "stylesheet";
+
+	addAttrs(link, options.attrs);
+	insertStyleElement(options, link);
+
+	return link;
+}
+
+function addAttrs (el, attrs) {
+	Object.keys(attrs).forEach(function (key) {
+		el.setAttribute(key, attrs[key]);
+	});
+}
+
+function getNonce() {
+	if (false) {}
+
+	return __webpack_require__.nc;
+}
+
+function addStyle (obj, options) {
+	var style, update, remove, result;
+
+	// If a transform function was defined, run it on the css
+	if (options.transform && obj.css) {
+	    result = typeof options.transform === 'function'
+		 ? options.transform(obj.css) 
+		 : options.transform.default(obj.css);
+
+	    if (result) {
+	    	// If transform returns a value, use that instead of the original css.
+	    	// This allows running runtime transformations on the css.
+	    	obj.css = result;
+	    } else {
+	    	// If the transform function returns a falsy value, don't add this css.
+	    	// This allows conditional loading of css
+	    	return function() {
+	    		// noop
+	    	};
+	    }
+	}
+
+	if (options.singleton) {
+		var styleIndex = singletonCounter++;
+
+		style = singleton || (singleton = createStyleElement(options));
+
+		update = applyToSingletonTag.bind(null, style, styleIndex, false);
+		remove = applyToSingletonTag.bind(null, style, styleIndex, true);
+
+	} else if (
+		obj.sourceMap &&
+		typeof URL === "function" &&
+		typeof URL.createObjectURL === "function" &&
+		typeof URL.revokeObjectURL === "function" &&
+		typeof Blob === "function" &&
+		typeof btoa === "function"
+	) {
+		style = createLinkElement(options);
+		update = updateLink.bind(null, style, options);
+		remove = function () {
+			removeStyleElement(style);
+
+			if(style.href) URL.revokeObjectURL(style.href);
+		};
+	} else {
+		style = createStyleElement(options);
+		update = applyToTag.bind(null, style);
+		remove = function () {
+			removeStyleElement(style);
+		};
+	}
+
+	update(obj);
+
+	return function updateStyle (newObj) {
+		if (newObj) {
+			if (
+				newObj.css === obj.css &&
+				newObj.media === obj.media &&
+				newObj.sourceMap === obj.sourceMap
+			) {
+				return;
+			}
+
+			update(obj = newObj);
+		} else {
+			remove();
+		}
+	};
+}
+
+var replaceText = (function () {
+	var textStore = [];
+
+	return function (index, replacement) {
+		textStore[index] = replacement;
+
+		return textStore.filter(Boolean).join('\n');
+	};
+})();
+
+function applyToSingletonTag (style, index, remove, obj) {
+	var css = remove ? "" : obj.css;
+
+	if (style.styleSheet) {
+		style.styleSheet.cssText = replaceText(index, css);
+	} else {
+		var cssNode = document.createTextNode(css);
+		var childNodes = style.childNodes;
+
+		if (childNodes[index]) style.removeChild(childNodes[index]);
+
+		if (childNodes.length) {
+			style.insertBefore(cssNode, childNodes[index]);
+		} else {
+			style.appendChild(cssNode);
+		}
+	}
+}
+
+function applyToTag (style, obj) {
+	var css = obj.css;
+	var media = obj.media;
+
+	if(media) {
+		style.setAttribute("media", media)
+	}
+
+	if(style.styleSheet) {
+		style.styleSheet.cssText = css;
+	} else {
+		while(style.firstChild) {
+			style.removeChild(style.firstChild);
+		}
+
+		style.appendChild(document.createTextNode(css));
+	}
+}
+
+function updateLink (link, options, obj) {
+	var css = obj.css;
+	var sourceMap = obj.sourceMap;
+
+	/*
+		If convertToAbsoluteUrls isn't defined, but sourcemaps are enabled
+		and there is no publicPath defined then lets turn convertToAbsoluteUrls
+		on by default.  Otherwise default to the convertToAbsoluteUrls option
+		directly
+	*/
+	var autoFixUrls = options.convertToAbsoluteUrls === undefined && sourceMap;
+
+	if (options.convertToAbsoluteUrls || autoFixUrls) {
+		css = fixUrls(css);
+	}
+
+	if (sourceMap) {
+		// http://stackoverflow.com/a/26603875
+		css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
+	}
+
+	var blob = new Blob([css], { type: "text/css" });
+
+	var oldSrc = link.href;
+
+	link.href = URL.createObjectURL(blob);
+
+	if(oldSrc) URL.revokeObjectURL(oldSrc);
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/lib/urls.js":
+/*!***********************************************!*\
+  !*** ./node_modules/style-loader/lib/urls.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+/**
+ * When source maps are enabled, `style-loader` uses a link element with a data-uri to
+ * embed the css on the page. This breaks all relative urls because now they are relative to a
+ * bundle instead of the current page.
+ *
+ * One solution is to only use full urls, but that may be impossible.
+ *
+ * Instead, this function "fixes" the relative urls to be absolute according to the current page location.
+ *
+ * A rudimentary test suite is located at `test/fixUrls.js` and can be run via the `npm test` command.
+ *
+ */
+
+module.exports = function (css) {
+  // get current location
+  var location = typeof window !== "undefined" && window.location;
+
+  if (!location) {
+    throw new Error("fixUrls requires window.location");
+  }
+
+	// blank or null?
+	if (!css || typeof css !== "string") {
+	  return css;
+  }
+
+  var baseUrl = location.protocol + "//" + location.host;
+  var currentDir = baseUrl + location.pathname.replace(/\/[^\/]*$/, "/");
+
+	// convert each url(...)
+	/*
+	This regular expression is just a way to recursively match brackets within
+	a string.
+
+	 /url\s*\(  = Match on the word "url" with any whitespace after it and then a parens
+	   (  = Start a capturing group
+	     (?:  = Start a non-capturing group
+	         [^)(]  = Match anything that isn't a parentheses
+	         |  = OR
+	         \(  = Match a start parentheses
+	             (?:  = Start another non-capturing groups
+	                 [^)(]+  = Match anything that isn't a parentheses
+	                 |  = OR
+	                 \(  = Match a start parentheses
+	                     [^)(]*  = Match anything that isn't a parentheses
+	                 \)  = Match a end parentheses
+	             )  = End Group
+              *\) = Match anything and then a close parens
+          )  = Close non-capturing group
+          *  = Match anything
+       )  = Close capturing group
+	 \)  = Match a close parens
+
+	 /gi  = Get all matches, not the first.  Be case insensitive.
+	 */
+	var fixedCss = css.replace(/url\s*\(((?:[^)(]|\((?:[^)(]+|\([^)(]*\))*\))*)\)/gi, function(fullMatch, origUrl) {
+		// strip quotes (if they exist)
+		var unquotedOrigUrl = origUrl
+			.trim()
+			.replace(/^"(.*)"$/, function(o, $1){ return $1; })
+			.replace(/^'(.*)'$/, function(o, $1){ return $1; });
+
+		// already a full url? no change
+		if (/^(#|data:|http:\/\/|https:\/\/|file:\/\/\/|\s*$)/i.test(unquotedOrigUrl)) {
+		  return fullMatch;
+		}
+
+		// convert the url to a full url
+		var newUrl;
+
+		if (unquotedOrigUrl.indexOf("//") === 0) {
+		  	//TODO: should we add protocol?
+			newUrl = unquotedOrigUrl;
+		} else if (unquotedOrigUrl.indexOf("/") === 0) {
+			// path should be relative to the base url
+			newUrl = baseUrl + unquotedOrigUrl; // already starts with '/'
+		} else {
+			// path should be relative to current directory
+			newUrl = currentDir + unquotedOrigUrl.replace(/^\.\//, ""); // Strip leading './'
+		}
+
+		// send back the fixed url(...)
+		return "url(" + JSON.stringify(newUrl) + ")";
+	});
+
+	// send back the fixed css
+	return fixedCss;
+};
+
+
+/***/ }),
+
+/***/ "./src/calendarBody.js":
+/*!*****************************!*\
+  !*** ./src/calendarBody.js ***!
+  \*****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return CalendarBody; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var MONTH_TYPE = {
+  LAST_MONTH: 0,
+  THIS_MONTH: 1,
+  NEXT_MONTH: 2
+};
+
+var CalendarBody = /*#__PURE__*/function () {
+  function CalendarBody() {
+    _classCallCheck(this, CalendarBody);
+
+    this.date = {};
+  }
+  /**
+   * Create calendar shell to be filled up later with actual values
+   */
+
+
+  _createClass(CalendarBody, [{
+    key: "createBody",
+    value: function createBody() {
+      var calendarBody = document.querySelector('#sdp-date-picker tbody');
+
+      for (var i = 1; i <= 6; i++) {
+        var tr = document.createElement('tr');
+
+        for (var j = 1; j <= 7; j++) {
+          var td = document.createElement('td');
+          td.innerText = 'x';
+          tr.appendChild(td);
+        }
+
+        calendarBody.appendChild(tr);
+      }
+    }
+    /**
+     * Fill up calendar body with actual values
+     */
+
+  }, {
+    key: "generate",
+    value: function generate() {
+      var calendarTable = document.querySelectorAll('#sdp-date-picker tbody td');
+      var thisMonthNumberOfDays = this.getNumberOfDays(MONTH_TYPE.THIS_MONTH);
+      var dateNumber = 1;
+      var startDay = new Date(this.date.currentYear, this.date.currentMonth, 1).getDay() - 1;
+      var lastMonthNumberOfDays = this.getNumberOfDays(MONTH_TYPE.LAST_MONTH);
+      var nextMonthNumberOfDays = 1;
+      startDay = startDay > -1 ? startDay : 6;
+      lastMonthNumberOfDays -= startDay - 1;
+
+      for (var i = 0; i < calendarTable.length; i++) {
+        var value = 0;
+        var radioButton = document.createElement('input');
+        var label = document.createElement('label');
+        calendarTable[i].innerHTML = '';
+        radioButton.type = 'radio';
+        radioButton.name = 'sdp-date-value';
+        radioButton.onchange = this.date.onchange; // Insert days belonging to the previous and next month
+
+        if (dateNumber === 1 || dateNumber === thisMonthNumberOfDays + 1) {
+          if (startDay > i) {
+            value = lastMonthNumberOfDays;
+            radioButton.value = "".concat(this.date.lastYear, "-").concat(this.date.lastMonth + 1, "-").concat(lastMonthNumberOfDays);
+            label.innerText = lastMonthNumberOfDays;
+            radioButton.id = 'sdp-last-month-value_' + lastMonthNumberOfDays;
+            label.htmlFor = 'sdp-last-month-value_' + lastMonthNumberOfDays;
+            lastMonthNumberOfDays++;
+          }
+
+          if (dateNumber > thisMonthNumberOfDays) {
+            value = nextMonthNumberOfDays;
+            radioButton.value = "".concat(this.date.nextYear, "-").concat(this.date.nextMonth + 1, "-").concat(nextMonthNumberOfDays);
+            label.innerText = nextMonthNumberOfDays;
+            radioButton.id = 'sdp-next-month-value_' + nextMonthNumberOfDays;
+            label.htmlFor = 'sdp-next-month-value_' + nextMonthNumberOfDays;
+            nextMonthNumberOfDays++;
+          }
+
+          calendarTable[i].classList.add('sdp-different-month');
+        } // Insert days belonging to the current month
+
+
+        if (startDay === i || dateNumber > 1 && dateNumber <= thisMonthNumberOfDays) {
+          value = dateNumber;
+          var _this$date = this.date,
+              selectedDate = _this$date.selectedDate,
+              currentMonth = _this$date.currentMonth,
+              currentYear = _this$date.currentYear;
+          calendarTable[i].classList.remove('sdp-different-month');
+          radioButton.value = "".concat(currentYear, "-").concat(currentMonth + 1, "-").concat(dateNumber);
+          radioButton.id = 'sdp-current-month-value_' + dateNumber;
+          label.htmlFor = 'sdp-current-month-value_' + dateNumber;
+
+          if (selectedDate.getDate() === dateNumber && selectedDate.getMonth() + 1 === currentMonth + 1 && selectedDate.getFullYear() === currentYear) {
+            radioButton.checked = true;
+          }
+
+          dateNumber++;
+        }
+
+        label.innerHTML = "".concat(value);
+        var div = document.createElement('div');
+        div.append(label);
+        calendarTable[i].appendChild(radioButton);
+        calendarTable[i].appendChild(div);
+      }
+    }
+  }, {
+    key: "update",
+    value: function update(data) {
+      this.date = Object.assign({}, data);
+      this.generate();
+    }
+  }, {
+    key: "getNumberOfDays",
+    value: function getNumberOfDays(type) {
+      if (type === MONTH_TYPE.THIS_MONTH) {
+        return new Date(this.date.currentYear, this.date.currentMonth + 1, 0).getDate();
+      }
+
+      if (type === MONTH_TYPE.LAST_MONTH) {
+        return new Date(this.date.lastYear || this.date.currentYear, this.date.lastMonth + 1, 0).getDate();
+      }
+
+      if (type === MONTH_TYPE.NEXT_MONTH) {
+        return new Date(this.date.nextYear || this.date.currentYear, this.date.nextMonth + 1, 0).getDate();
+      }
+    }
+  }]);
+
+  return CalendarBody;
+}();
+
+
+
+/***/ }),
+
+/***/ "./src/events.js":
+/*!***********************!*\
+  !*** ./src/events.js ***!
+  \***********************/
+/*! exports provided: EventObserver, EventHandler */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EventObserver", function() { return EventObserver; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EventHandler", function() { return EventHandler; });
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var EventObserver = function EventObserver() {
+  var type = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+  var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
+
+  _classCallCheck(this, EventObserver);
+
+  this.type = type;
+  this.callback = callback;
+};
+var EventHandler = /*#__PURE__*/function () {
+  function EventHandler() {
+    _classCallCheck(this, EventHandler);
+
+    this.observers = [];
+  }
+
+  _createClass(EventHandler, [{
+    key: "subscribe",
+    value: function subscribe(observer) {
+      if (!(observer instanceof EventObserver)) {
+        throw new Error('Invalid argument: Observer');
+      }
+
+      this.observers.push(observer);
+    }
+  }, {
+    key: "unsubscribe",
+    value: function unsubscribe(observer) {
+      if (!(observer instanceof EventObserver)) {
+        throw new Error('Invalid argument: Observer');
+      }
+
+      this.observers = this.observers.filter(function (instance) {
+        return observer != instance;
+      });
+    }
+  }, {
+    key: "broadcast",
+    value: function broadcast(observerType, changes) {
+      this.observers.filter(function (observer) {
+        return observer.type === observerType;
+      }).forEach(function (observer) {
+        return observer.callback(changes);
+      });
+    }
+  }]);
+
+  return EventHandler;
+}();
+
+/***/ }),
+
+/***/ "./src/i18n/all.js":
+/*!*************************!*\
+  !*** ./src/i18n/all.js ***!
+  \*************************/
+/*! exports provided: getTranslations */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTranslations", function() { return getTranslations; });
+/* harmony import */ var _en__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./en */ "./src/i18n/en.js");
+/* harmony import */ var _fr__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./fr */ "./src/i18n/fr.js");
+/* harmony import */ var _ja__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ja */ "./src/i18n/ja.js");
+/* harmony import */ var _de__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./de */ "./src/i18n/de.js");
+
+
+
+
+function getTranslations() {
+  return {
+    en: _en__WEBPACK_IMPORTED_MODULE_0__["en"],
+    fr: _fr__WEBPACK_IMPORTED_MODULE_1__["fr"],
+    ja: _ja__WEBPACK_IMPORTED_MODULE_2__["ja"],
+    de: _de__WEBPACK_IMPORTED_MODULE_3__["de"]
+  };
+}
+
+/***/ }),
+
+/***/ "./src/i18n/de.js":
+/*!************************!*\
+  !*** ./src/i18n/de.js ***!
+  \************************/
+/*! exports provided: de */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "de", function() { return de; });
+var de = {
+  today: 'Heute',
+  days: {
+    mon: 'Mo',
+    tue: 'Di',
+    wed: 'Mi',
+    thu: 'Do',
+    fri: 'Fr',
+    sat: 'Sa',
+    sun: 'So'
+  },
+  months: {
+    january: 'Januar',
+    febuary: 'Februar',
+    march: 'März',
+    april: 'April',
+    may: 'Mai',
+    june: 'Juni',
+    july: 'Juli',
+    august: 'August',
+    september: 'September',
+    october: 'Oktober',
+    november: 'November',
+    december: 'Dezember'
+  }
+};
+
+/***/ }),
+
+/***/ "./src/i18n/en.js":
+/*!************************!*\
+  !*** ./src/i18n/en.js ***!
+  \************************/
+/*! exports provided: en */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "en", function() { return en; });
+var en = {
+  today: 'Today',
+  days: {
+    mon: 'Mon',
+    tue: 'Tue',
+    wed: 'Wed',
+    thu: 'Thu',
+    fri: 'Fri',
+    sat: 'Sat',
+    sun: 'Sun'
+  },
+  months: {
+    january: 'January',
+    febuary: 'Febuary',
+    march: 'March',
+    april: 'April',
+    may: 'May',
+    june: 'June',
+    july: 'July',
+    august: 'August',
+    september: 'September',
+    october: 'October',
+    november: 'November',
+    december: 'December'
+  }
+};
+
+/***/ }),
+
+/***/ "./src/i18n/fr.js":
+/*!************************!*\
+  !*** ./src/i18n/fr.js ***!
+  \************************/
+/*! exports provided: fr */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fr", function() { return fr; });
+var fr = {
+  today: 'Au jourd\'hui',
+  days: {
+    mon: 'Lun',
+    tue: 'Mar',
+    wed: 'Mer',
+    thu: 'Jeu',
+    fri: 'Ven',
+    sat: 'Sam',
+    sun: 'Dim'
+  },
+  months: {
+    january: 'Janvier',
+    febuary: 'Février',
+    march: 'Mars',
+    april: 'April',
+    may: 'Mai',
+    june: 'Juin',
+    july: 'Julliet',
+    august: 'Août',
+    september: 'Septembre',
+    october: 'Octobre',
+    november: 'Novembre',
+    december: 'Décembre'
+  }
+};
+
+/***/ }),
+
+/***/ "./src/i18n/ja.js":
+/*!************************!*\
+  !*** ./src/i18n/ja.js ***!
+  \************************/
+/*! exports provided: ja */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ja", function() { return ja; });
+var ja = {
+  today: '今日',
+  days: {
+    mon: '月',
+    tue: '火',
+    wed: '水',
+    thu: '木',
+    fri: '金',
+    sat: '土',
+    sun: '日'
+  },
+  months: {
+    january: '一月',
+    febuary: '二月',
+    march: '三月',
+    april: '四月',
+    may: '五月',
+    june: '六月',
+    july: '七月',
+    august: '八月',
+    september: '九月',
+    october: '十月',
+    november: '十一月',
+    december: '十二月'
+  }
+};
+
+/***/ }),
+
+/***/ "./src/index.js":
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
+/*! exports provided: DatePicker */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _picker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./picker */ "./src/picker.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DatePicker", function() { return _picker__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+/* harmony import */ var _main_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./main.scss */ "./src/main.scss");
+/* harmony import */ var _main_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_main_scss__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+
+/***/ }),
+
+/***/ "./src/main.scss":
+/*!***********************!*\
+  !*** ./src/main.scss ***!
+  \***********************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../node_modules/css-loader!../node_modules/sass-loader/dist/cjs.js!./main.scss */ "./node_modules/css-loader/index.js!./node_modules/sass-loader/dist/cjs.js!./src/main.scss");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./src/picker.js":
+/*!***********************!*\
+  !*** ./src/picker.js ***!
+  \***********************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return DatePicker; });
+/* harmony import */ var _i18n_all__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./i18n/all */ "./src/i18n/all.js");
+/* harmony import */ var _calendarBody__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./calendarBody */ "./src/calendarBody.js");
+/* harmony import */ var _events__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./events */ "./src/events.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+
+
+var DatePicker = /*#__PURE__*/function () {
+  function DatePicker() {
+    _classCallCheck(this, DatePicker);
+
+    this.eventHandler = new _events__WEBPACK_IMPORTED_MODULE_2__["EventHandler"]();
+    this.date = {};
+  }
+
+  _createClass(DatePicker, [{
+    key: "initialize",
+    value: function initialize(_ref) {
+      var _ref$defaultValue = _ref.defaultValue,
+          defaultValue = _ref$defaultValue === void 0 ? null : _ref$defaultValue,
+          _ref$lang = _ref.lang,
+          lang = _ref$lang === void 0 ? '' : _ref$lang,
+          _ref$dateChanged = _ref.dateChanged,
+          dateChanged = _ref$dateChanged === void 0 ? function () {} : _ref$dateChanged;
+
+      if (defaultValue && !(defaultValue instanceof Date)) {
+        throw new Error('Invalid argument: Date');
+      }
+
+      if (typeof lang !== 'string') {
+        throw new Error('Invalid argument: string');
+      }
+
+      if (typeof dateChanged !== 'function') {
+        throw new Error('Invalid argument: functon');
+      }
+
+      this.date.selectedDate = defaultValue || new Date();
+      this.lang = lang;
+      this.translations = Object(_i18n_all__WEBPACK_IMPORTED_MODULE_0__["getTranslations"])()[this.lang || 'en'];
+      this.date.onchange = this.setInputValue.bind(this);
+      this.calendarBody = new _calendarBody__WEBPACK_IMPORTED_MODULE_1__["default"]();
+      var observer = new _events__WEBPACK_IMPORTED_MODULE_2__["EventObserver"]('calendar-update', this.calendarBody.update.bind(this.calendarBody));
+      this.eventHandler.subscribe(observer);
+      this.dateChanged = dateChanged;
+      this.createCalendar();
+      this.setPickerFields();
+    }
+  }, {
+    key: "setDefaultInputValue",
+    value: function setDefaultInputValue(date, input) {
+      if (this.lang) {
+        input.value = date.toLocaleDateString(this.lang);
+      } else {
+        input.value = date.toLocaleDateString();
+      }
+    }
+  }, {
+    key: "setInputValue",
+    value: function setInputValue(event) {
+      var date = new Date(event.target.value);
+      this.setDefaultInputValue(date, this.focusedElement);
+      this.dateChanged(date);
+      this.focusedElement = null;
+      var datePicker = document.querySelector('#sdp-date-picker');
+      datePicker.style.display = 'none';
+    }
+  }, {
+    key: "setPickerFields",
+    value: function setPickerFields() {
+      var _this = this;
+
+      var inputFields = document.querySelectorAll('input[data-datepicker]');
+      var datePicker = document.querySelector('#sdp-date-picker');
+      this.focusedElement = null;
+      inputFields.forEach(function (input) {
+        input.setAttribute('readonly', true);
+
+        _this.setDefaultInputValue(_this.date.selectedDate, input);
+
+        input.onfocus = function (event) {
+          var rects = event.target.getBoundingClientRect();
+          _this.focusedElement = event.target;
+          datePicker.style.display = 'table';
+          datePicker.style.left = rects.left + 'px';
+          datePicker.style.top = event.target.offsetHeight + rects.top + 'px';
+
+          _this.setDefaults(event.target.value);
+        };
+      });
+      this.hideIfOutsideBox();
+    }
+  }, {
+    key: "hideIfOutsideBox",
+    value: function hideIfOutsideBox() {
+      document.addEventListener('click', function (event) {
+        var datePicker = document.querySelector('#sdp-date-picker');
+        var focusedElement = document.querySelector('input[data-datepicker]:focus');
+
+        if (focusedElement || datePicker.contains(event.target)) {
+          return;
+        }
+
+        datePicker.style.display = 'none';
+      });
+    }
+  }, {
+    key: "setDefaults",
+    value: function setDefaults(value) {
+      // Only set the selected value if the value exists.
+      // This selectedDate will be assigned the value of the currently focused input
+      if (value) {
+        this.date.selectedDate = new Date(value);
+      }
+
+      this.date.current = value ? new Date(value) : new Date();
+      this.date.currentYear = this.date.current.getFullYear();
+      this.date.currentMonth = this.date.current.getMonth();
+      this.updateCalendar();
+    }
+  }, {
+    key: "setPreviousAndNextDates",
+    value: function setPreviousAndNextDates() {
+      if (this.date.currentMonth === 0) {
+        this.date.lastMonth = 11;
+      } else {
+        this.date.lastMonth = this.date.currentMonth - 1;
+      }
+
+      if (this.date.currentMonth >= 11) {
+        this.date.nextMonth = 0;
+      } else {
+        this.date.nextMonth = this.date.currentMonth + 1;
+      }
+
+      this.date.lastYear = new Date(this.date.current.setYear(this.date.currentYear - 1)).getFullYear();
+      this.date.nextYear = new Date(this.date.current.setYear(this.date.currentYear + 1)).getFullYear();
+    }
+  }, {
+    key: "updateCalendar",
+    value: function updateCalendar() {
+      this.setPreviousAndNextDates();
+      this.setMonthYearText();
+      this.eventHandler.broadcast('calendar-update', this.date);
+    }
+  }, {
+    key: "createCalendar",
+    value: function createCalendar() {
+      var bodyElement = document.querySelector('body');
+      var headings = Object.values(this.translations.days).map(function (day) {
+        return "<th>".concat(day, "</th>");
+      });
+      bodyElement.innerHTML += "\n        <div id=\"sdp-date-picker\" style=\"display: none;\">\n            <table>\n                <thead>\n                    <tr id=\"spd-month-switcher\">\n                        <th colspan=\"7\">\n                            <span id=\"sdp-month-prev-button\">\n                                <button><<</button><button><</button>\n                            </span>\n                            <span id=\"spd-monthYear\"></span>\n                            <span id=\"sdp-month-next-button\">\n                                <button>></button><button>>></button>\n                            </span>\n                        </th>\n                    </tr>\n                    <tr>\n                        <th colspan=\"7\"><button id=\"spd-reset-button\">".concat(this.translations.today, "</button></th>\n                    </tr>\n                    <tr>").concat(headings.join(''), "</tr>\n                </thead>\n                <tbody></tbody>\n            </table>\n        </div>");
+      this.setButtons();
+      this.calendarBody.createBody();
+      this.setDefaults();
+    }
+  }, {
+    key: "setButtons",
+    value: function setButtons() {
+      var _this2 = this;
+
+      var buttonPrevYear = document.querySelector('#sdp-month-prev-button button:first-child');
+      var buttonPrevMonth = document.querySelector('#sdp-month-prev-button button:nth-child(2)');
+      var buttonNextMonth = document.querySelector('#sdp-month-next-button button:nth-child(2)');
+      var buttonNextYear = document.querySelector('#sdp-month-next-button button:first-child');
+      var resetToTodayButton = document.querySelector('#spd-reset-button');
+      buttonPrevMonth.onclick = this.goToPrevMonth.bind(this);
+      buttonPrevYear.onclick = this.goToPrevYear.bind(this);
+      buttonNextMonth.onclick = this.goToNextYear.bind(this);
+      buttonNextYear.onclick = this.goToNextMonth.bind(this);
+
+      resetToTodayButton.onclick = function () {
+        return _this2.setDefaults();
+      };
+    }
+  }, {
+    key: "goToPrevYear",
+    value: function goToPrevYear() {
+      this.date.currentYear--;
+      this.updateCalendar();
+    }
+  }, {
+    key: "goToNextYear",
+    value: function goToNextYear() {
+      this.date.currentYear++;
+      this.updateCalendar();
+    }
+  }, {
+    key: "goToPrevMonth",
+    value: function goToPrevMonth() {
+      if (this.date.currentMonth === 0) {
+        this.date.currentMonth = 11;
+        this.date.currentYear = new Date(this.date.current.setYear(this.date.currentYear - 1)).getFullYear();
+      } else {
+        this.date.currentMonth--;
+      }
+
+      this.date.current = new Date(this.date.currentYear, this.date.currentMonth, 1);
+      this.updateCalendar();
+    }
+  }, {
+    key: "goToNextMonth",
+    value: function goToNextMonth() {
+      if (this.date.currentMonth >= 11) {
+        this.date.currentMonth = 0;
+        this.date.currentYear = new Date(this.date.current.setYear(this.date.currentYear + 1)).getFullYear();
+      } else {
+        this.date.currentMonth++;
+      }
+
+      this.date.current = new Date(this.date.currentYear, this.date.currentMonth, 1);
+      this.updateCalendar();
+    }
+  }, {
+    key: "setMonthYearText",
+    value: function setMonthYearText() {
+      var months = Object.values(this.translations.months);
+      document.getElementById('spd-monthYear').innerText = "".concat(months[this.date.currentMonth], " ").concat(this.date.currentYear);
+    }
+  }]);
+
+  return DatePicker;
+}();
+
+
+
+/***/ }),
+
+/***/ 0:
+/*!****************************!*\
+  !*** multi ./src/index.js ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! ./src/index.js */"./src/index.js");
+
+
+/***/ })
+
+/******/ });
 //# sourceMappingURL=bundle.js.map
